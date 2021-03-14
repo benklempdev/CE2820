@@ -1,1 +1,7 @@
-*.flock
+verilog/db/*
+verilog/incremental_db/*
+*.asm.*
+*.map.*
+*.flow.*
+*.fit.*
+*.sta.*
