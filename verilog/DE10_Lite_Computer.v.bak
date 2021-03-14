@@ -149,8 +149,8 @@ Computer_System The_System (
 	// Global signals
 	.system_pll_ref_clk_clk					(CLOCK_50),
 	.system_pll_ref_reset_reset			(1'b0),
-//	.video_pll_ref_clk_clk			(CLOCK2_50),
-//	.video_pll_ref_reset_reset		(1'b0),
+	.video_pll_ref_clk_clk			(CLOCK2_50),
+	.video_pll_ref_reset_reset		(1'b0),
 
 	// Arduino GPIO
 	.arduino_gpio_export						(ARDUINO_IO),
@@ -175,14 +175,14 @@ Computer_System The_System (
 	.hex5_hex4_export							(hex5_hex4),
 	
 	// VGA Subsystem
-//	.vga_CLK										(),
-//	.vga_BLANK									(),
-//	.vga_SYNC									(),
-//	.vga_HS										(VGA_HS),
-//	.vga_VS										(VGA_VS),
-//	.vga_R										(VGA_R),
-//	.vga_G										(VGA_G),
-//	.vga_B										(VGA_B),
+	.vga_CLK										(),
+	.vga_BLANK									(),
+	.vga_SYNC									(),
+	.vga_HS										(VGA_HS),
+	.vga_VS										(VGA_VS),
+	.vga_R										(VGA_R),
+	.vga_G										(VGA_G),
+	.vga_B										(VGA_B),
 	
 	// SDRAM
 	.sdram_clk_clk								(DRAM_CLK),
@@ -197,10 +197,10 @@ Computer_System The_System (
 	.sdram_we_n									(DRAM_WE_N),
 	
 	// the Accelerometer
-//	.accelerometer_I2C_SDAT				(G_SENSOR_SDI),
-//	.accelerometer_I2C_SCLK				(G_SENSOR_SCLK),
-//	.accelerometer_G_SENSOR_CS_N		(G_SENSOR_CS_N),
-//	.accelerometer_G_SENSOR_INT		(G_SENSOR_INT)
+	.accelerometer_I2C_SDAT				(G_SENSOR_SDI),
+	.accelerometer_I2C_SCLK				(G_SENSOR_SCLK),
+	.accelerometer_G_SENSOR_CS_N		(G_SENSOR_CS_N),
+	.accelerometer_G_SENSOR_INT		(G_SENSOR_INT)
 );
 
 
