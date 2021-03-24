@@ -5,3 +5,4 @@ verilog/incremental_db/*
 *.flow.*
 *.fit.*
 *.sta.*
+*.bak
