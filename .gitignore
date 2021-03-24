@@ -6,3 +6,4 @@ verilog/incremental_db/*
 *.fit.*
 *.sta.*
 *.bak
+*.qws
