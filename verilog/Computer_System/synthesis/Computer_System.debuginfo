@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="Computer_System" kind="system" version="18.1" fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2021.03.14.12:11:16 -->
+ <!-- 2021.03.24.16:56:39 -->
  <!-- A collection of modules and connections -->
  <parameter name="clockCrossingAdapter">
   <type>com.altera.sopcmodel.ensemble.EClockAdapter</type>
@@ -13,7 +13,7 @@
  </parameter>
  <parameter name="device">
   <type>java.lang.String</type>
-  <value>10M50DAF484C6GES</value>
+  <value>10M50DAF484C7G</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>true</visible>
@@ -29,7 +29,7 @@
  </parameter>
  <parameter name="deviceSpeedGrade">
   <type>java.lang.String</type>
-  <value>6</value>
+  <value>7</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -53,7 +53,7 @@
  </parameter>
  <parameter name="generationId">
   <type>int</type>
-  <value>1615741819</value>
+  <value>1616622940</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>true</visible>
@@ -7930,7 +7930,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_DEVICE">
    <type>java.lang.String</type>
-   <value>10M50DAF484C6GES</value>
+   <value>10M50DAF484C7G</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -7939,7 +7939,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_DEVICE_SPEEDGRADE">
    <type>java.lang.String</type>
-   <value>6</value>
+   <value>7</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -11015,7 +11015,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_DEVICE">
    <type>java.lang.String</type>
-   <value>10M50DAF484C6GES</value>
+   <value>10M50DAF484C7G</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -11024,7 +11024,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_DEVICE_SPEEDGRADE">
    <type>java.lang.String</type>
-   <value>6</value>
+   <value>7</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -16559,7 +16559,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1615741819</value>
+   <value>1616622940</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -16579,7 +16579,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1615741819</value>
+   <value>1616622940</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -16595,7 +16595,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1615741819</value>
+   <value>1616622940</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>
@@ -17150,7 +17150,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_DEVICE">
    <type>java.lang.String</type>
-   <value>10M50DAF484C6GES</value>
+   <value>10M50DAF484C7G</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -17159,7 +17159,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_DEVICE_SPEEDGRADE">
    <type>java.lang.String</type>
-   <value>6</value>
+   <value>7</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -19595,7 +19595,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_DEVICE">
    <type>java.lang.String</type>
-   <value>10M50DAF484C6GES</value>
+   <value>10M50DAF484C7G</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -31387,5 +31387,5 @@ parameters are a RESULT of the module parameters. -->
   <version>18.1</version>
  </plugin>
  <reportVersion>18.1 625</reportVersion>
- <uniqueIdentifier>0A00270000030000017831B7B858</uniqueIdentifier>
+ <uniqueIdentifier>0A002700000300000178663C8E7B</uniqueIdentifier>
 </EnsembleReport>
