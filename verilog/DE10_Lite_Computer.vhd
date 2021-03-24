@@ -61,7 +61,7 @@ architecture STRUCTURAL of DE10_Lite_Computer is
             arduino_reset_n_export     : out   std_logic;                                        -- export
             expansion_jp1_export       : inout std_logic_vector(31 downto 0) := (others => 'X'); -- export
             hex3_hex0_export           : out   std_logic_vector(31 downto 0);                    -- export
-            hex5_hex4_export           : out   std_logic_vector(15 downto 0);                    -- export
+            hex5_hex4_export           : out   std_logic_vector(31 downto 0);                    -- export
             leds_export                : out   std_logic_vector(9 downto 0);                     -- export
             pushbuttons_export         : in    std_logic_vector(1 downto 0)  := (others => 'X'); -- export
             sdram_addr                 : out   std_logic_vector(12 downto 0);                    -- addr
@@ -81,7 +81,10 @@ architecture STRUCTURAL of DE10_Lite_Computer is
     end component Computer_System;
 	 
 	 signal hex3_hex0 : std_logic_vector(31 downto 0); 
-	 signal hex5_hex4 : std_logic_vector(15 downto 0);
+	 signal hex5_hex4 : std_logic_vector(31 downto 0);
+	 
+	 signal hex3_hex0_out : std_logic_vector(31 downto 0);
+	 signal hex5_hex4_out : std_logic_vector(31 downto 0);
 	 
 	 signal dqm : std_logic_vector(1 downto 0);
 	 signal jp1 : std_logic_vector(31 downto 0);
@@ -130,13 +133,32 @@ begin
             sdram_clk_clk              => DRAM_CLK              --            sdram_clk.clk
                         
         );
+
+	chex0: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(3 downto 0), hex3_hex0_out(7 downto 0));
+	chex1: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(11 downto 8), hex3_hex0_out(15 downto 8));
+	chex2: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(19 downto 16), hex3_hex0_out(23 downto 16));
+	chex3: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(27 downto 24), hex3_hex0_out(31 downto 24));
+	chex4: entity work.periph_7seg port map(hex5_hex4(16), hex5_hex4(3 downto 0), hex5_hex4_out(7 downto 0));
+	chex5: entity work.periph_7seg port map(hex5_hex4(16), hex5_hex4(11 downto 8), hex5_hex4_out(15 downto 8));
 		  
-	HEX0 <= not hex3_hex0(7 downto 0);
-	HEX1 <= not hex3_hex0(15 downto 8);
-	HEX2 <= not hex3_hex0(23 downto 16);
-	HEX3 <= not hex3_hex0(31 downto 24);
-	HEX4 <= not hex5_hex4(7 downto 0);
-	HEX5 <= not hex5_hex4(15 downto 8);
+	phex: process(all)
+	begin
+		if hex5_hex4(17) = '1' then
+			HEX0 <= not hex3_hex0_out(7 downto 0);
+			HEX1 <= not hex3_hex0_out(15 downto 8);
+			HEX2 <= not hex3_hex0_out(23 downto 16);
+			HEX3 <= not hex3_hex0_out(31 downto 24);
+			HEX4 <= not hex5_hex4_out(7 downto 0);
+			HEX5 <= not hex5_hex4_out(15 downto 8);
+		else
+			HEX0 <= not hex3_hex0(7 downto 0);
+			HEX1 <= not hex3_hex0(15 downto 8);
+			HEX2 <= not hex3_hex0(23 downto 16);
+			HEX3 <= not hex3_hex0(31 downto 24);
+			HEX4 <= not hex5_hex4(7 downto 0);
+			HEX5 <= not hex5_hex4(15 downto 8);
+		end if;
+	end process;
 	
 	GPIO(0) <= jp1(0);
 	GPIO(15 downto 3) <= jp1(13 downto 1);

@@ -8,7 +8,7 @@ module Computer_System (
 		output wire        arduino_reset_n_export,     //      arduino_reset_n.export
 		inout  wire [31:0] expansion_jp1_export,       //        expansion_jp1.export
 		output wire [31:0] hex3_hex0_export,           //            hex3_hex0.export
-		output wire [15:0] hex5_hex4_export,           //            hex5_hex4.export
+		output wire [31:0] hex5_hex4_export,           //            hex5_hex4.export
 		output wire [9:0]  leds_export,                //                 leds.export
 		input  wire [1:0]  pushbuttons_export,         //          pushbuttons.export
 		output wire [12:0] sdram_addr,                 //                sdram.addr
