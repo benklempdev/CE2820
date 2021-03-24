@@ -7,3 +7,7 @@ verilog/incremental_db/*
 *.sta.*
 *.bak
 *.qws
+
+#Ignore everthing from components except the vhd files
+components/*/*
+!components/*/*.vhd
