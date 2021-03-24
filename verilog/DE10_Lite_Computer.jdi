@@ -1,9 +1,9 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="cb1c5eee360eaa2bec08"/>
+    <hash md5_digest_80b="77d5af83e31606995a2c"/>
   </project>
   <file_info>
-    <file device="10M50DAF484C6GES" path="DE10_Lite_Computer.sof" usercode="0xFFFFFFFF"/>
+    <file device="10M50DAF484C7G" path="DE10_Lite_Computer.sof" usercode="0xFFFFFFFF"/>
   </file_info>
   <hub_info hub_ir_width="6" ir_width="3" node_addr_width="3" node_count="4"/>
   <node_info>
@@ -271,7 +271,7 @@
   <sld_infos>
     <sld_info hpath="Computer_System:u0" name="u0">
       <assignment_values>
-        <assignment_value text="QSYS_NAME Computer_System HAS_SOPCINFO 1 GENERATION_ID 1615741819"/>
+        <assignment_value text="QSYS_NAME Computer_System HAS_SOPCINFO 1 GENERATION_ID 1616622940"/>
       </assignment_values>
       <parameters/>
     </sld_info>

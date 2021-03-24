@@ -134,12 +134,12 @@ begin
                         
         );
 
-	chex0: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(3 downto 0), hex3_hex0_out(7 downto 0));
-	chex1: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(11 downto 8), hex3_hex0_out(15 downto 8));
-	chex2: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(19 downto 16), hex3_hex0_out(23 downto 16));
-	chex3: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(27 downto 24), hex3_hex0_out(31 downto 24));
-	chex4: entity work.periph_7seg port map(hex5_hex4(16), hex5_hex4(3 downto 0), hex5_hex4_out(7 downto 0));
-	chex5: entity work.periph_7seg port map(hex5_hex4(16), hex5_hex4(11 downto 8), hex5_hex4_out(15 downto 8));
+	chex0: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(7 downto 0), hex3_hex0_out(7 downto 0));
+	chex1: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(15 downto 8), hex3_hex0_out(15 downto 8));
+	chex2: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(23 downto 16), hex3_hex0_out(23 downto 16));
+	chex3: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(31 downto 24), hex3_hex0_out(31 downto 24));
+	chex4: entity work.periph_7seg port map(hex5_hex4(16), hex5_hex4(7 downto 0), hex5_hex4_out(7 downto 0));
+	chex5: entity work.periph_7seg port map(hex5_hex4(16), hex5_hex4(15 downto 8), hex5_hex4_out(15 downto 8));
 		  
 	phex: process(all)
 	begin
