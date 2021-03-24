@@ -463,9 +463,9 @@
 }
 ]]></parameter>
  <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
- <parameter name="device" value="10M50DAF484C6GES" />
+ <parameter name="device" value="10M50DAF484C7G" />
  <parameter name="deviceFamily" value="MAX 10" />
- <parameter name="deviceSpeedGrade" value="6" />
+ <parameter name="deviceSpeedGrade" value="7" />
  <parameter name="fabricMode" value="QSYS" />
  <parameter name="generateLegacySim" value="false" />
  <parameter name="generationId" value="0" />
@@ -746,9 +746,9 @@
    kind="altera_jtag_avalon_master"
    version="18.1"
    enabled="1">
-  <parameter name="AUTO_DEVICE" value="10M50DAF484C6GES" />
+  <parameter name="AUTO_DEVICE" value="10M50DAF484C7G" />
   <parameter name="AUTO_DEVICE_FAMILY" value="MAX 10" />
-  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="6" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="7" />
   <parameter name="COMPONENT_CLOCK" value="0" />
   <parameter name="FAST_VER" value="0" />
   <parameter name="FIFO_DEPTHS" value="2" />
@@ -772,8 +772,8 @@
  <module name="Nios2" kind="altera_nios2_gen2" version="18.1" enabled="1">
   <parameter name="AUTO_CLK_CLOCK_DOMAIN" value="6" />
   <parameter name="AUTO_CLK_RESET_DOMAIN" value="6" />
-  <parameter name="AUTO_DEVICE" value="10M50DAF484C6GES" />
-  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="6" />
+  <parameter name="AUTO_DEVICE" value="10M50DAF484C7G" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="7" />
   <parameter name="bht_ramBlockType" value="Automatic" />
   <parameter name="breakOffset" value="32" />
   <parameter name="breakSlave" value="None" />
@@ -1252,8 +1252,8 @@
    kind="altera_up_avalon_sys_sdram_pll"
    version="18.0"
    enabled="1">
-  <parameter name="AUTO_DEVICE" value="10M50DAF484C6GES" />
-  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="6" />
+  <parameter name="AUTO_DEVICE" value="10M50DAF484C7G" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="7" />
   <parameter name="CIII_boards" value="DE0" />
   <parameter name="CIV_boards" value="DE2-115" />
   <parameter name="CV_boards" value="DE10-Standard" />
@@ -1268,8 +1268,8 @@
   <parameter name="AUTO_DEVICE_FAMILY" value="MAX 10" />
   <parameter name="AUTO_DEVICE_SPEEDGRADE" value="6" />
   <parameter name="AUTO_GENERATION_ID" value="0" />
-  <parameter name="AUTO_PIXEL_DMA_MASTER_ADDRESS_MAP"><![CDATA[<address-map><slave name='SDRAM.s1' start='0x0' end='0x4000000' /><slave name='Onchip_SRAM.s2' start='0x8000000' end='0x8010000' /></address-map>]]></parameter>
-  <parameter name="AUTO_PIXEL_DMA_MASTER_ADDRESS_WIDTH" value="AddressWidth = 28" />
+  <parameter name="AUTO_PIXEL_DMA_MASTER_ADDRESS_MAP" value="" />
+  <parameter name="AUTO_PIXEL_DMA_MASTER_ADDRESS_WIDTH" value="AddressWidth = -1" />
   <parameter name="AUTO_SYS_CLK_CLOCK_DOMAIN" value="6" />
   <parameter name="AUTO_SYS_CLK_CLOCK_RATE" value="100000000" />
   <parameter name="AUTO_SYS_CLK_RESET_DOMAIN" value="6" />
