@@ -19,7 +19,8 @@ module Computer_System (
 	sdram_clk_clk,
 	slider_switches_export,
 	system_pll_ref_clk_clk,
-	system_pll_ref_reset_reset);	
+	system_pll_ref_reset_reset,
+	servo_control_export);	
 
 	inout	[15:0]	arduino_gpio_export;
 	output		arduino_reset_n_export;
@@ -41,4 +42,5 @@ module Computer_System (
 	input	[9:0]	slider_switches_export;
 	input		system_pll_ref_clk_clk;
 	input		system_pll_ref_reset_reset;
+	output	[31:0]	servo_control_export;
 endmodule
