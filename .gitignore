@@ -9,5 +9,6 @@ verilog/incremental_db/*
 *.qws
 
 #Ignore everthing from components except the vhd files
-components/*/*
-!components/*/*.vhd
+components/*
+!components/lib/
+!components/lib/*.vhd
