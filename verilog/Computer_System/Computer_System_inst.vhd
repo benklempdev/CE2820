@@ -19,8 +19,7 @@
 			sdram_clk_clk              : out   std_logic;                                        -- clk
 			slider_switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
 			system_pll_ref_clk_clk     : in    std_logic                     := 'X';             -- clk
-			system_pll_ref_reset_reset : in    std_logic                     := 'X';             -- reset
-			servo_control_export       : out   std_logic_vector(31 downto 0)                     -- export
+			system_pll_ref_reset_reset : in    std_logic                     := 'X'              -- reset
 		);
 	end component Computer_System;
 
@@ -45,7 +44,6 @@
 			sdram_clk_clk              => CONNECTED_TO_sdram_clk_clk,              --            sdram_clk.clk
 			slider_switches_export     => CONNECTED_TO_slider_switches_export,     --      slider_switches.export
 			system_pll_ref_clk_clk     => CONNECTED_TO_system_pll_ref_clk_clk,     --   system_pll_ref_clk.clk
-			system_pll_ref_reset_reset => CONNECTED_TO_system_pll_ref_reset_reset, -- system_pll_ref_reset.reset
-			servo_control_export       => CONNECTED_TO_servo_control_export        --        servo_control.export
+			system_pll_ref_reset_reset => CONNECTED_TO_system_pll_ref_reset_reset  -- system_pll_ref_reset.reset
 		);
 
