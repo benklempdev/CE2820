@@ -548,6 +548,11 @@
    type="clock"
    dir="start" />
  <interface
+   name="servo_control"
+   internal="Servo_Control.servo_control"
+   type="conduit"
+   dir="end" />
+ <interface
    name="slider_switches"
    internal="Slider_Switches.external_connection"
    type="conduit"
