@@ -75,6 +75,7 @@ architecture STRUCTURAL of DE10_Lite_Computer is
             sdram_we_n                 : out   std_logic;                                        -- we_n
             sdram_clk_clk              : out   std_logic;                                        -- clk
             slider_switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
+				servo_control_out_signal	: out   std_logic;
             system_pll_ref_clk_clk     : in    std_logic                     := 'X';             -- clk
             system_pll_ref_reset_reset : in    std_logic                     := 'X'              -- reset
         );
@@ -88,6 +89,10 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 	 
 	 signal dqm : std_logic_vector(1 downto 0);
 	 signal jp1 : std_logic_vector(31 downto 0);
+	 
+	 signal servo_control: std_logic;
+	 
+	 signal arduino_io_signal: std_logic_vector(15 downto 0);
 
     
 
@@ -104,7 +109,7 @@ begin
 				system_pll_ref_clk_clk     => CLOCK_50,     --   system_pll_ref_clk.clk
             system_pll_ref_reset_reset => '0',  -- system_pll_ref_reset.reset
     
-				arduino_gpio_export        => ARDUINO_IO,        --         arduino_gpio.export
+				arduino_gpio_export        => ARDUINO_IO_signal,        --         arduino_gpio.export
             arduino_reset_n_export     => ARDUINO_RESET_N,     --      arduino_reset_n.export
 
 				slider_switches_export     => SW,     --      slider_switches.export
@@ -119,6 +124,8 @@ begin
             hex5_hex4_export           => hex5_hex4,           --            hex5_hex4.export
  
 				leds_export                => LEDR,                --                 leds.export
+				
+				servo_control_out_signal	=> servo_control,
 
 
 				sdram_addr                 => DRAM_ADDR,                 --                sdram.addr
@@ -160,10 +167,13 @@ begin
 		end if;
 	end process;
 	
+	
 	GPIO(0) <= jp1(0);
 	GPIO(15 downto 3) <= jp1(13 downto 1);
 	GPIO(17) <= jp1(14);
 	GPIO(35 downto 19) <= jp1(31 downto 15);
+	
+	ARDUINO_IO <= arduino_io_signal(15 downto 10) & servo_control & arduino_io_signal(8 downto 0);
 	
 	
 end architecture STRUCTURAL;

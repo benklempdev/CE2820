@@ -17,6 +17,7 @@
 			sdram_ras_n                : out   std_logic;                                        -- ras_n
 			sdram_we_n                 : out   std_logic;                                        -- we_n
 			sdram_clk_clk              : out   std_logic;                                        -- clk
+			servo_control_out_port     : inout std_logic                     := 'X';             -- out_port
 			slider_switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
 			system_pll_ref_clk_clk     : in    std_logic                     := 'X';             -- clk
 			system_pll_ref_reset_reset : in    std_logic                     := 'X'              -- reset
@@ -42,6 +43,7 @@
 			sdram_ras_n                => CONNECTED_TO_sdram_ras_n,                --                     .ras_n
 			sdram_we_n                 => CONNECTED_TO_sdram_we_n,                 --                     .we_n
 			sdram_clk_clk              => CONNECTED_TO_sdram_clk_clk,              --            sdram_clk.clk
+			servo_control_out_port     => CONNECTED_TO_servo_control_out_port,     --        servo_control.out_port
 			slider_switches_export     => CONNECTED_TO_slider_switches_export,     --      slider_switches.export
 			system_pll_ref_clk_clk     => CONNECTED_TO_system_pll_ref_clk_clk,     --   system_pll_ref_clk.clk
 			system_pll_ref_reset_reset => CONNECTED_TO_system_pll_ref_reset_reset  -- system_pll_ref_reset.reset

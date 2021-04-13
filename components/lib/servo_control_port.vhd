@@ -7,14 +7,14 @@ entity servo_control_port is
 	port(
 		avalon: in port16_t;
 		writedata: in bus16_t;
-		readdata: out bus16_t
+		readdata: out bus16_t;
+		control: out std_logic
 	);
 end entity;
 
 architecture arch of servo_control_port is
 	signal en, rst, clk: std_logic;
 	signal pos: std_logic_vector(7 downto 0);
-	signal control: std_logic;
 
 	signal data: std_logic_vector(15 downto 0);
 	begin

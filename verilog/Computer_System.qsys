@@ -86,6 +86,22 @@
          type = "String";
       }
    }
+   element Computer_System
+   {
+      datum _originalDeviceFamily
+      {
+         value = "MAX 10";
+         type = "String";
+      }
+   }
+   element Computer_System
+   {
+      datum _originalDeviceFamily
+      {
+         value = "MAX 10";
+         type = "String";
+      }
+   }
    element Expansion_JP1
    {
       datum _sortIndex
@@ -549,7 +565,7 @@
    dir="start" />
  <interface
    name="servo_control"
-   internal="Servo_Control.servo_control"
+   internal="Servo_Control.external_connection"
    type="conduit"
    dir="end" />
  <interface
