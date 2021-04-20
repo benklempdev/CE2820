@@ -57,27 +57,28 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 
  component Computer_System is
         port (
-            arduino_gpio_export        : inout std_logic_vector(15 downto 0) := (others => 'X'); -- export
-            arduino_reset_n_export     : out   std_logic;                                        -- export
-            expansion_jp1_export       : inout std_logic_vector(31 downto 0) := (others => 'X'); -- export
-            hex3_hex0_export           : out   std_logic_vector(31 downto 0);                    -- export
-            hex5_hex4_export           : out   std_logic_vector(31 downto 0);                    -- export
-            leds_export                : out   std_logic_vector(9 downto 0);                     -- export
-            pushbuttons_export         : in    std_logic_vector(1 downto 0)  := (others => 'X'); -- export
-            sdram_addr                 : out   std_logic_vector(12 downto 0);                    -- addr
-            sdram_ba                   : out   std_logic_vector(1 downto 0);                     -- ba
-            sdram_cas_n                : out   std_logic;                                        -- cas_n
-            sdram_cke                  : out   std_logic;                                        -- cke
-            sdram_cs_n                 : out   std_logic;                                        -- cs_n
-            sdram_dq                   : inout std_logic_vector(15 downto 0) := (others => 'X'); -- dq
-            sdram_dqm                  : out   std_logic_vector(1 downto 0);                     -- dqm
-            sdram_ras_n                : out   std_logic;                                        -- ras_n
-            sdram_we_n                 : out   std_logic;                                        -- we_n
-            sdram_clk_clk              : out   std_logic;                                        -- clk
-            slider_switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
-				servo_control_out_signal	: out   std_logic;
-            system_pll_ref_clk_clk     : in    std_logic                     := 'X';             -- clk
-            system_pll_ref_reset_reset : in    std_logic                     := 'X'              -- reset
+		arduino_gpio_export        : inout std_logic_vector(15 downto 0) := (others => 'X'); -- export
+		arduino_reset_n_export     : out   std_logic;                                        -- export
+		expansion_jp1_export       : inout std_logic_vector(31 downto 0) := (others => 'X'); -- export
+		hex3_hex0_export           : out   std_logic_vector(31 downto 0);                    -- export
+		hex5_hex4_export           : out   std_logic_vector(31 downto 0);                    -- export
+		leds_export                : out   std_logic_vector(9 downto 0);                     -- export
+		pushbuttons_export         : in    std_logic_vector(1 downto 0)  := (others => 'X'); -- export
+		sdram_addr                 : out   std_logic_vector(12 downto 0);                    -- addr
+		sdram_ba                   : out   std_logic_vector(1 downto 0);                     -- ba
+		sdram_cas_n                : out   std_logic;                                        -- cas_n
+		sdram_cke                  : out   std_logic;                                        -- cke
+		sdram_cs_n                 : out   std_logic;                                        -- cs_n
+		sdram_dq                   : inout std_logic_vector(15 downto 0) := (others => 'X'); -- dq
+		sdram_dqm                  : out   std_logic_vector(1 downto 0);                     -- dqm
+		sdram_ras_n                : out   std_logic;                                        -- ras_n
+		sdram_we_n                 : out   std_logic;                                        -- we_n
+		sdram_clk_clk              : out   std_logic;                                        -- clk
+		slider_switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
+		servo_control_0_export	   : out   std_logic;
+		servo_control_1_export	   : out   std_logic;
+		system_pll_ref_clk_clk     : in    std_logic                     := 'X';             -- clk
+		system_pll_ref_reset_reset : in    std_logic                     := 'X'              -- reset
         );
     end component Computer_System;
 	 
@@ -90,7 +91,7 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 	 signal dqm : std_logic_vector(1 downto 0);
 	 signal jp1 : std_logic_vector(31 downto 0);
 	 
-	 signal servo_control: std_logic;
+	 signal servo_control_0, servo_control_1: std_logic;
 	 
 	 signal arduino_io_signal: std_logic_vector(15 downto 0);
 
@@ -125,7 +126,7 @@ begin
  
 				leds_export                => LEDR,                --                 leds.export
 				
-				servo_control_out_signal	=> servo_control,
+				servo_control_0_export	=> servo_control_0,
 
 
 				sdram_addr                 => DRAM_ADDR,                 --                sdram.addr
@@ -173,7 +174,7 @@ begin
 	GPIO(17) <= jp1(14);
 	GPIO(35 downto 19) <= jp1(31 downto 15);
 	
-	ARDUINO_IO <= arduino_io_signal(15 downto 10) & servo_control & arduino_io_signal(8 downto 0);
+	ARDUINO_IO <= arduino_io_signal(15 downto 11) & servo_control_1 & servo_control_0 & arduino_io_signal(8 downto 0);
 	
 	
 end architecture STRUCTURAL;
