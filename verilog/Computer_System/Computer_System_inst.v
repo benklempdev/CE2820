@@ -16,7 +16,8 @@
 		.sdram_ras_n                (<connected-to-sdram_ras_n>),                //                     .ras_n
 		.sdram_we_n                 (<connected-to-sdram_we_n>),                 //                     .we_n
 		.sdram_clk_clk              (<connected-to-sdram_clk_clk>),              //            sdram_clk.clk
-		.servo_control_out_signal   (<connected-to-servo_control_out_signal>),   //        servo_control.out_signal
+		.servo_control_0_export     (<connected-to-servo_control_0_export>),     //      servo_control_0.export
+		.servo_control_1_export     (<connected-to-servo_control_1_export>),     //      servo_control_1.export
 		.slider_switches_export     (<connected-to-slider_switches_export>),     //      slider_switches.export
 		.system_pll_ref_clk_clk     (<connected-to-system_pll_ref_clk_clk>),     //   system_pll_ref_clk.clk
 		.system_pll_ref_reset_reset (<connected-to-system_pll_ref_reset_reset>)  // system_pll_ref_reset.reset
