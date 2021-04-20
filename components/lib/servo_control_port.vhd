@@ -22,8 +22,6 @@ architecture arch of servo_control_port is
 	signal data: std_logic_vector(15 downto 0);
 	begin
 		--Map signals
-		rst <= avalon.rst;
-		clk <= avalon.clk;
 		en <= data(8);
 		pos <= data(7 downto 0);
 
