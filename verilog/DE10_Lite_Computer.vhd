@@ -127,6 +127,7 @@ begin
 				leds_export                => LEDR,                --                 leds.export
 				
 				servo_control_0_export	=> servo_control_0,
+				servo_control_1_export  => servo_control_1,
 
 
 				sdram_addr                 => DRAM_ADDR,                 --                sdram.addr
