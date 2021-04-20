@@ -5,7 +5,6 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-use work.port_pkg.all;
 
 entity Computer_System is
 	port (
@@ -26,7 +25,7 @@ entity Computer_System is
 		sdram_ras_n                : out   std_logic;                                        --                     .ras_n
 		sdram_we_n                 : out   std_logic;                                        --                     .we_n
 		sdram_clk_clk              : out   std_logic;                                        --            sdram_clk.clk
-		servo_control_out_signal   : inout std_logic                     := '0';             --        servo_control.out_signal
+		servo_control_out_signal   : out   std_logic;                                        --        servo_control.out_signal
 		slider_switches_export     : in    std_logic_vector(9 downto 0)  := (others => '0'); --      slider_switches.export
 		system_pll_ref_clk_clk     : in    std_logic                     := '0';             --   system_pll_ref_clk.clk
 		system_pll_ref_reset_reset : in    std_logic                     := '0'              -- system_pll_ref_reset.reset
@@ -112,19 +111,6 @@ architecture rtl of Computer_System is
 			out_port   : out std_logic_vector(31 downto 0)                     -- export
 		);
 	end component Computer_System_HEX3_HEX0;
-
-	component Computer_System_HEX5_HEX4 is
-		port (
-			clk        : in  std_logic                     := 'X';             -- clk
-			reset_n    : in  std_logic                     := 'X';             -- reset_n
-			address    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
-			write_n    : in  std_logic                     := 'X';             -- write_n
-			writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
-			chipselect : in  std_logic                     := 'X';             -- chipselect
-			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
-			out_port   : out std_logic_vector(31 downto 0)                     -- export
-		);
-	end component Computer_System_HEX5_HEX4;
 
 	component Computer_System_Interval_Timer is
 		port (
@@ -314,19 +300,19 @@ architecture rtl of Computer_System is
 		);
 	end component Computer_System_SDRAM;
 
---	component servo_control_port is
---		port (
---			clk        : in    std_logic                     := 'X';             -- clk
---			rst        : in    std_logic                     := 'X';             -- reset
---			readdata   : out   std_logic_vector(15 downto 0);                    -- readdata
---			writedata  : in    std_logic_vector(15 downto 0) := (others => 'X'); -- writedata
---			read       : in    std_logic                     := 'X';             -- read
---			write      : in    std_logic                     := 'X';             -- write
---			address    : in    std_logic                     := 'X';             -- address
---			byteenable : in    std_logic_vector(1 downto 0)  := (others => 'X'); -- byteenable
---			control    : inout std_logic                     := 'X'              -- out_signal
---		);
---	end component servo_control_port;
+	component servo_control_port is
+		port (
+			clk        : in  std_logic                     := 'X';             -- clk
+			rst        : in  std_logic                     := 'X';             -- reset
+			readdata   : out std_logic_vector(15 downto 0);                    -- readdata
+			writedata  : in  std_logic_vector(15 downto 0) := (others => 'X'); -- writedata
+			read       : in  std_logic                     := 'X';             -- read
+			write      : in  std_logic                     := 'X';             -- write
+			address    : in  std_logic                     := 'X';             -- address
+			byteenable : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- byteenable
+			control    : out std_logic                                         -- out_signal
+		);
+	end component servo_control_port;
 
 	component Computer_System_Slider_Switches is
 		port (
@@ -1068,7 +1054,7 @@ begin
 			out_port   => hex3_hex0_export                                -- external_connection.export
 		);
 
-	hex5_hex4 : component Computer_System_HEX5_HEX4
+	hex5_hex4 : component Computer_System_HEX3_HEX0
 		port map (
 			clk        => system_pll_sys_clk_clk,                         --                 clk.clk
 			reset_n    => rst_controller_reset_out_reset_ports_inv,       --               reset.reset_n
@@ -1285,18 +1271,16 @@ begin
 			zs_we_n        => sdram_we_n                                       --      .export
 		);
 
-	servo_control : entity work.servo_control_port
+	servo_control : component servo_control_port
 		port map (
-			avalon	  => (
-				clk        => system_pll_sys_clk_clk,                                         --                 clk.clk
-				rst        => rst_controller_reset_out_reset,                                 --                 rst.reset
-				read       => mm_interconnect_0_servo_control_servo_control_slave_read,       --                    .read
-				write      => mm_interconnect_0_servo_control_servo_control_slave_write,      --                    .write
-				address    => mm_interconnect_0_servo_control_servo_control_slave_address(0 downto 0), --                    .address
-				byteenable => mm_interconnect_0_servo_control_servo_control_slave_byteenable --                    .byteenable
-				),
+			clk        => system_pll_sys_clk_clk,                                         --                 clk.clk
+			rst        => rst_controller_reset_out_reset,                                 --                 rst.reset
 			readdata   => mm_interconnect_0_servo_control_servo_control_slave_readdata,   -- servo_control_slave.readdata
 			writedata  => mm_interconnect_0_servo_control_servo_control_slave_writedata,  --                    .writedata
+			read       => mm_interconnect_0_servo_control_servo_control_slave_read,       --                    .read
+			write      => mm_interconnect_0_servo_control_servo_control_slave_write,      --                    .write
+			address    => mm_interconnect_0_servo_control_servo_control_slave_address(0), --                    .address
+			byteenable => mm_interconnect_0_servo_control_servo_control_slave_byteenable, --                    .byteenable
 			control    => servo_control_out_signal                                        -- external_connection.out_signal
 		);
 

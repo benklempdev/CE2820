@@ -682,7 +682,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="16" />
+  <parameter name="width" value="32" />
  </module>
  <module
    name="Interval_Timer"
@@ -1267,7 +1267,7 @@
   <parameter name="registerDataIn" value="true" />
   <parameter name="rowWidth" value="13" />
  </module>
- <module name="Servo_Control" kind="servo_control" version="1.0" enabled="1" />
+ <module name="Servo_Control" kind="servo_control" version="1.1" enabled="1" />
  <module
    name="Slider_Switches"
    kind="altera_avalon_pio"

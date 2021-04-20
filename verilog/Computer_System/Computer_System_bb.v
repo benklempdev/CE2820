@@ -17,7 +17,7 @@ module Computer_System (
 	sdram_ras_n,
 	sdram_we_n,
 	sdram_clk_clk,
-	servo_control_out_port,
+	servo_control_out_signal,
 	slider_switches_export,
 	system_pll_ref_clk_clk,
 	system_pll_ref_reset_reset);	
@@ -26,7 +26,7 @@ module Computer_System (
 	output		arduino_reset_n_export;
 	inout	[31:0]	expansion_jp1_export;
 	output	[31:0]	hex3_hex0_export;
-	output	[15:0]	hex5_hex4_export;
+	output	[31:0]	hex5_hex4_export;
 	output	[9:0]	leds_export;
 	input	[1:0]	pushbuttons_export;
 	output	[12:0]	sdram_addr;
@@ -39,7 +39,7 @@ module Computer_System (
 	output		sdram_ras_n;
 	output		sdram_we_n;
 	output		sdram_clk_clk;
-	inout		servo_control_out_port;
+	output		servo_control_out_signal;
 	input	[9:0]	slider_switches_export;
 	input		system_pll_ref_clk_clk;
 	input		system_pll_ref_reset_reset;
