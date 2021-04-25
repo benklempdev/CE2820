@@ -80,12 +80,16 @@ architecture arch of prescaler is
 		
 		pquickfix0: process(all)
 		begin
-			if uscaler = 0 then
-				sclk <= '0';
-			elsif uscaler = 1 then
-				sclk <= clk;
+			if en = '1' then
+				if uscaler = 0 then
+					sclk <= '0';
+				elsif uscaler = 1 then
+					sclk <= clk;
+				else
+					sclk <= oclk;
+				end if;
 			else
-				sclk <= oclk;
+				sclk <= '0';
 			end if;
 		end process;
 
