@@ -67,7 +67,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
   </table>
   <table class="blueBar">
    <tr>
-    <td class="l">2021.04.24.19:08:51</td>
+    <td class="l">2021.04.25.17:26:10</td>
     <td class="r">Datasheet</td>
    </tr>
   </table>
@@ -142,7 +142,10 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
      </a> altera_avalon_pio 18.1
      <br/>&#160;&#160;
      <a href="#module_SysID"><b>SysID</b>
-     </a> altera_avalon_sysid_qsys 18.1</span>
+     </a> altera_avalon_sysid_qsys 18.1
+     <br/>&#160;&#160;
+     <a href="#module_video_pixel_buffer_dma_0"><b>video_pixel_buffer_dma_0</b>
+     </a> altera_up_avalon_video_pixel_buffer_dma 18.0</span>
    </div>
   </div>
   <div style="width:100% ;  height:10px"> </div>
@@ -158,11 +161,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
      <a href="#module_Nios2"><b>Nios2</b>
      </a>
     </td>
+    <td class="mastermodule" colspan="1">
+     <a href="#module_video_pixel_buffer_dma_0"><b>video_pixel_buffer_dma_0</b>
+     </a>
+    </td>
    </tr>
    <tr>
     <td class="masterlr">&#160;master</td>
     <td class="masterl">&#160;data_master</td>
     <td class="masterr">&#160;instruction_master</td>
+    <td class="masterlr">&#160;avalon_pixel_dma_master</td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
@@ -172,11 +180,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">adc_slave&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff204000</td>
     <td class="addr"><span style="color:#989898">0x</span>ff204000</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -187,11 +197,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200100</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200100</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -202,11 +214,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200110</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200110</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -217,11 +231,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200060</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200060</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -232,11 +248,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200020</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200020</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -247,11 +265,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200030</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200030</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -262,11 +282,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff202000</td>
     <td class="addr"><span style="color:#989898">0x</span>ff202000</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -277,11 +299,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff202020</td>
     <td class="addr"><span style="color:#989898">0x</span>ff202020</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -292,11 +316,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">avalon_jtag_slave&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff201000</td>
     <td class="addr"><span style="color:#989898">0x</span>ff201000</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -307,9 +333,11 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">avalon_jtag_slave&#160;</td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -322,11 +350,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200000</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200000</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -337,12 +367,14 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">debug_mem_slave&#160;</td>
     <td class="empty"></td>
     <td class="addr"><span style="color:#989898">0x</span>0a000000</td>
     <td class="addr"><span style="color:#989898">0x</span>0a000000</td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
@@ -352,11 +384,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavem">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>08000000</td>
     <td class="addr"><span style="color:#989898">0x</span>08000000</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -364,6 +398,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="addr"><span style="color:#989898">0x</span>08000000</td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
@@ -373,11 +408,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200050</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200050</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -388,12 +425,14 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>00000000</td>
     <td class="addr"><span style="color:#989898">0x</span>00000000</td>
     <td class="addr"><span style="color:#989898">0x</span>00000000</td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
@@ -403,11 +442,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">servo_control_slave&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200070</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200070</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -418,11 +459,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">servo_control_slave&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200080</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200080</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -433,11 +476,13 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">s1&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200040</td>
     <td class="addr"><span style="color:#989898">0x</span>ff200040</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
    <tr>
@@ -448,11 +493,30 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slaveb">control_slave&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>ff202040</td>
     <td class="addr"><span style="color:#989898">0x</span>ff202040</td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+   </tr>
+   <tr>
+    <td class="slavemodule">&#160;
+     <a href="#module_video_pixel_buffer_dma_0"><b>video_pixel_buffer_dma_0</b>
+     </a>
+    </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+   </tr>
+   <tr>
+    <td class="slaveb">avalon_control_slave&#160;</td>
+    <td class="addr"><span style="color:#989898">0x</span>ff200200</td>
+    <td class="addr"><span style="color:#989898">0x</span>ff200200</td>
+    <td class="empty"></td>
     <td class="empty"></td>
    </tr>
   </table>
@@ -2343,7 +2407,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
        <a href="#module_System_PLL">System_PLL</a>
       </td>
       <td class="from">sys_clk&#160;&#160;</td>
-      <td class="main" rowspan="54">JTAG_to_FPGA_Bridge</td>
+      <td class="main" rowspan="57">JTAG_to_FPGA_Bridge</td>
      </tr>
      <tr>
       <td class="to">&#160;&#160;clk</td>
@@ -2366,6 +2430,22 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
       <td></td>
       <td></td>
       <td class="to">&#160;&#160;adc_slave</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">master&#160;&#160;</td>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_video_pixel_buffer_dma_0">video_pixel_buffer_dma_0</a>
+      </td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;avalon_control_slave</td>
      </tr>
      <tr style="height:6px">
       <td></td>
@@ -2905,7 +2985,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
        <a href="#module_System_PLL">System_PLL</a>
       </td>
       <td class="from">sys_clk&#160;&#160;</td>
-      <td class="main" rowspan="73">Nios2</td>
+      <td class="main" rowspan="76">Nios2</td>
      </tr>
      <tr>
       <td class="to">&#160;&#160;clk</td>
@@ -2928,6 +3008,22 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
       <td></td>
       <td></td>
       <td class="to">&#160;&#160;adc_slave</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">data_master&#160;&#160;</td>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_video_pixel_buffer_dma_0">video_pixel_buffer_dma_0</a>
+      </td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;avalon_control_slave</td>
      </tr>
      <tr style="height:6px">
       <td></td>
@@ -3980,7 +4076,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
        </tr>
        <tr>
         <td class="parametername">dataSlaveMapParam</td>
-        <td class="parametervalue">&lt;address-map&gt;&lt;slave name='SDRAM.s1' start='0x0' end='0x4000000' type='altera_avalon_new_sdram_controller.s1' /&gt;&lt;slave name='Onchip_SRAM.s1' start='0x8000000' end='0x8010000' type='altera_avalon_onchip_memory2.s1' /&gt;&lt;slave name='Nios2.debug_mem_slave' start='0xA000000' end='0xA000800' type='altera_nios2_gen2.debug_mem_slave' /&gt;&lt;slave name='LEDs.s1' start='0xFF200000' end='0xFF200010' type='altera_avalon_pio.s1' /&gt;&lt;slave name='HEX3_HEX0.s1' start='0xFF200020' end='0xFF200030' type='altera_avalon_pio.s1' /&gt;&lt;slave name='HEX5_HEX4.s1' start='0xFF200030' end='0xFF200040' type='altera_avalon_pio.s1' /&gt;&lt;slave name='Slider_Switches.s1' start='0xFF200040' end='0xFF200050' type='altera_avalon_pio.s1' /&gt;&lt;slave name='Pushbuttons.s1' start='0xFF200050' end='0xFF200060' type='altera_avalon_pio.s1' /&gt;&lt;slave name='Expansion_JP1.s1' start='0xFF200060' end='0xFF200070' type='altera_avalon_pio.s1' /&gt;&lt;slave name='Servo0.servo_control_slave' start='0xFF200070' end='0xFF200074' type='servo_control.servo_control_slave' /&gt;&lt;slave name='Servo1.servo_control_slave' start='0xFF200080' end='0xFF200084' type='servo_control.servo_control_slave' /&gt;&lt;slave name='Arduino_GPIO.s1' start='0xFF200100' end='0xFF200110' type='altera_avalon_pio.s1' /&gt;&lt;slave name='Arduino_Reset_N.s1' start='0xFF200110' end='0xFF200120' type='altera_avalon_pio.s1' /&gt;&lt;slave name='JTAG_UART.avalon_jtag_slave' start='0xFF201000' end='0xFF201008' type='altera_avalon_jtag_uart.avalon_jtag_slave' /&gt;&lt;slave name='Interval_Timer.s1' start='0xFF202000' end='0xFF202020' type='altera_avalon_timer.s1' /&gt;&lt;slave name='Interval_Timer_2.s1' start='0xFF202020' end='0xFF202040' type='altera_avalon_timer.s1' /&gt;&lt;slave name='SysID.control_slave' start='0xFF202040' end='0xFF202048' type='altera_avalon_sysid_qsys.control_slave' /&gt;&lt;slave name='ADC.adc_slave' start='0xFF204000' end='0xFF204020' type='altera_up_avalon_adc.adc_slave' /&gt;&lt;/address-map&gt;</td>
+        <td class="parametervalue">&lt;address-map&gt;&lt;slave name='SDRAM.s1' start='0x0' end='0x4000000' type='altera_avalon_new_sdram_controller.s1' /&gt;&lt;slave name='Onchip_SRAM.s1' start='0x8000000' end='0x8010000' type='altera_avalon_onchip_memory2.s1' /&gt;&lt;slave name='Nios2.debug_mem_slave' start='0xA000000' end='0xA000800' type='altera_nios2_gen2.debug_mem_slave' /&gt;&lt;slave name='LEDs.s1' start='0xFF200000' end='0xFF200010' type='altera_avalon_pio.s1' /&gt;&lt;slave name='HEX3_HEX0.s1' start='0xFF200020' end='0xFF200030' type='altera_avalon_pio.s1' /&gt;&lt;slave name='HEX5_HEX4.s1' start='0xFF200030' end='0xFF200040' type='altera_avalon_pio.s1' /&gt;&lt;slave name='Slider_Switches.s1' start='0xFF200040' end='0xFF200050' type='altera_avalon_pio.s1' /&gt;&lt;slave name='Pushbuttons.s1' start='0xFF200050' end='0xFF200060' type='altera_avalon_pio.s1' /&gt;&lt;slave name='Expansion_JP1.s1' start='0xFF200060' end='0xFF200070' type='altera_avalon_pio.s1' /&gt;&lt;slave name='Servo0.servo_control_slave' start='0xFF200070' end='0xFF200074' type='servo_control.servo_control_slave' /&gt;&lt;slave name='Servo1.servo_control_slave' start='0xFF200080' end='0xFF200084' type='servo_control.servo_control_slave' /&gt;&lt;slave name='Arduino_GPIO.s1' start='0xFF200100' end='0xFF200110' type='altera_avalon_pio.s1' /&gt;&lt;slave name='Arduino_Reset_N.s1' start='0xFF200110' end='0xFF200120' type='altera_avalon_pio.s1' /&gt;&lt;slave name='video_pixel_buffer_dma_0.avalon_control_slave' start='0xFF200200' end='0xFF200210' type='altera_up_avalon_video_pixel_buffer_dma.avalon_control_slave' /&gt;&lt;slave name='JTAG_UART.avalon_jtag_slave' start='0xFF201000' end='0xFF201008' type='altera_avalon_jtag_uart.avalon_jtag_slave' /&gt;&lt;slave name='Interval_Timer.s1' start='0xFF202000' end='0xFF202020' type='altera_avalon_timer.s1' /&gt;&lt;slave name='Interval_Timer_2.s1' start='0xFF202020' end='0xFF202040' type='altera_avalon_timer.s1' /&gt;&lt;slave name='SysID.control_slave' start='0xFF202040' end='0xFF202048' type='altera_avalon_sysid_qsys.control_slave' /&gt;&lt;slave name='ADC.adc_slave' start='0xFF204000' end='0xFF204020' type='altera_up_avalon_adc.adc_slave' /&gt;&lt;/address-map&gt;</td>
        </tr>
        <tr>
         <td class="parametername">tightlyCoupledDataMaster0MapParam</td>
@@ -5459,7 +5555,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
        </tr>
        <tr>
         <td class="parametername">timestamp</td>
-        <td class="parametervalue">1619309330</td>
+        <td class="parametervalue">1619389569</td>
        </tr>
        <tr>
         <td class="parametername">deviceFamily</td>
@@ -5484,7 +5580,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
        </tr>
        <tr>
         <td class="parametername">TIMESTAMP</td>
-        <td class="parametervalue">1619309330</td>
+        <td class="parametervalue">1619389569</td>
        </tr>
       </table>
      </td>
@@ -5574,10 +5670,349 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     </tr>
    </table>
   </div>
+  <a name="module_video_lt24_controller_0"> </a>
+  <div>
+   <hr/>
+   <h2>video_lt24_controller_0</h2>altera_up_avalon_video_lt24_controller v18.0
+   <br/>
+   <div class="greydiv">
+    <table class="connectionboxes">
+     <tr>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_video_pixel_buffer_dma_0">video_pixel_buffer_dma_0</a>
+      </td>
+      <td class="from">avalon_pixel_source&#160;&#160;</td>
+      <td class="main" rowspan="7">video_lt24_controller_0</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;avalon_LT24_sink</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td class="neighbor" rowspan="4">
+       <a href="#module_video_pll_0">video_pll_0</a>
+      </td>
+      <td class="from">lcd_clk&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;clk</td>
+     </tr>
+     <tr>
+      <td class="from">reset_source&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;reset</td>
+     </tr>
+    </table>
+   </div>
+   <br/>
+   <br/>
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Parameters</h2>
+      <table>
+       <tr>
+        <td class="parametername">AUTO_DEVICE_FAMILY</td>
+        <td class="parametervalue">MAX10FPGA</td>
+       </tr>
+       <tr>
+        <td class="parametername">AUTO_CLK_CLOCK_RATE</td>
+        <td class="parametervalue">15000000</td>
+       </tr>
+       <tr>
+        <td class="parametername">deviceFamily</td>
+        <td class="parametervalue">MAX 10</td>
+       </tr>
+       <tr>
+        <td class="parametername">generateLegacySim</td>
+        <td class="parametervalue">false</td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>&#160;&#160;
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Software Assignments</h2>(none)</td>
+    </tr>
+   </table>
+  </div>
+  <a name="module_video_pixel_buffer_dma_0"> </a>
+  <div>
+   <hr/>
+   <h2>video_pixel_buffer_dma_0</h2>altera_up_avalon_video_pixel_buffer_dma v18.0
+   <br/>
+   <div class="greydiv">
+    <table class="connectionboxes">
+     <tr>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_Nios2">Nios2</a>
+      </td>
+      <td class="from">data_master&#160;&#160;</td>
+      <td class="main" rowspan="12">video_pixel_buffer_dma_0</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;avalon_control_slave</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_JTAG_to_FPGA_Bridge">JTAG_to_FPGA_Bridge</a>
+      </td>
+      <td class="from">master&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;avalon_control_slave</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td class="neighbor" rowspan="4">
+       <a href="#module_video_pll_0">video_pll_0</a>
+      </td>
+      <td class="from">lcd_clk&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;clk</td>
+     </tr>
+     <tr>
+      <td class="from">reset_source&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;reset</td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">avalon_pixel_source&#160;&#160;</td>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_video_lt24_controller_0">video_lt24_controller_0</a>
+      </td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;avalon_LT24_sink</td>
+     </tr>
+    </table>
+   </div>
+   <br/>
+   <br/>
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Parameters</h2>
+      <table>
+       <tr>
+        <td class="parametername">addr_mode</td>
+        <td class="parametervalue">Consecutive</td>
+       </tr>
+       <tr>
+        <td class="parametername">start_address</td>
+        <td class="parametervalue">66060288</td>
+       </tr>
+       <tr>
+        <td class="parametername">back_start_address</td>
+        <td class="parametervalue">66060288</td>
+       </tr>
+       <tr>
+        <td class="parametername">image_width</td>
+        <td class="parametervalue">320</td>
+       </tr>
+       <tr>
+        <td class="parametername">image_height</td>
+        <td class="parametervalue">240</td>
+       </tr>
+       <tr>
+        <td class="parametername">color_space</td>
+        <td class="parametervalue">16-bit RGB</td>
+       </tr>
+       <tr>
+        <td class="parametername">AUTO_DEVICE_FAMILY</td>
+        <td class="parametervalue">MAX10FPGA</td>
+       </tr>
+       <tr>
+        <td class="parametername">AUTO_CLK_CLOCK_RATE</td>
+        <td class="parametervalue">15000000</td>
+       </tr>
+       <tr>
+        <td class="parametername">deviceFamily</td>
+        <td class="parametervalue">MAX 10</td>
+       </tr>
+       <tr>
+        <td class="parametername">generateLegacySim</td>
+        <td class="parametervalue">false</td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>&#160;&#160;
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Software Assignments</h2>(none)</td>
+    </tr>
+   </table>
+  </div>
+  <a name="module_video_pll_0"> </a>
+  <div>
+   <hr/>
+   <h2>video_pll_0</h2>altera_up_avalon_video_pll v18.0
+   <br/>
+   <div class="greydiv">
+    <table class="connectionboxes">
+     <tr>
+      <td class="neighbor" rowspan="4">
+       <a href="#module_System_PLL">System_PLL</a>
+      </td>
+      <td class="from">sys_clk&#160;&#160;</td>
+      <td class="main" rowspan="13">video_pll_0</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;ref_clk</td>
+     </tr>
+     <tr>
+      <td class="from">reset_source&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;ref_reset</td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">lcd_clk&#160;&#160;</td>
+      <td class="neighbor" rowspan="4">
+       <a href="#module_video_lt24_controller_0">video_lt24_controller_0</a>
+      </td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;clk</td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">reset_source&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;reset</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">lcd_clk&#160;&#160;</td>
+      <td class="neighbor" rowspan="4">
+       <a href="#module_video_pixel_buffer_dma_0">video_pixel_buffer_dma_0</a>
+      </td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;clk</td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">reset_source&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;reset</td>
+     </tr>
+    </table>
+   </div>
+   <br/>
+   <br/>
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Parameters</h2>
+      <table>
+       <tr>
+        <td class="parametername">gui_refclk</td>
+        <td class="parametervalue">50.0</td>
+       </tr>
+       <tr>
+        <td class="parametername">refclk</td>
+        <td class="parametervalue">50.0</td>
+       </tr>
+       <tr>
+        <td class="parametername">video_in_clk_en</td>
+        <td class="parametervalue">false</td>
+       </tr>
+       <tr>
+        <td class="parametername">camera</td>
+        <td class="parametervalue">5MP Digital Camera (THDB_D5M)</td>
+       </tr>
+       <tr>
+        <td class="parametername">vga_clk_en</td>
+        <td class="parametervalue">false</td>
+       </tr>
+       <tr>
+        <td class="parametername">gui_resolution</td>
+        <td class="parametervalue">VGA 640x480</td>
+       </tr>
+       <tr>
+        <td class="parametername">resolution</td>
+        <td class="parametervalue">VGA 640x480</td>
+       </tr>
+       <tr>
+        <td class="parametername">lcd_clk_en</td>
+        <td class="parametervalue">true</td>
+       </tr>
+       <tr>
+        <td class="parametername">lcd</td>
+        <td class="parametervalue">2.4" LCD on LT24</td>
+       </tr>
+       <tr>
+        <td class="parametername">device_family</td>
+        <td class="parametervalue">MAX10FPGA</td>
+       </tr>
+       <tr>
+        <td class="parametername">AUTO_DEVICE</td>
+        <td class="parametervalue">10M50DAF484C7G</td>
+       </tr>
+       <tr>
+        <td class="parametername">AUTO_DEVICE_SPEEDGRADE</td>
+        <td class="parametervalue">7</td>
+       </tr>
+       <tr>
+        <td class="parametername">deviceFamily</td>
+        <td class="parametervalue">UNKNOWN</td>
+       </tr>
+       <tr>
+        <td class="parametername">generateLegacySim</td>
+        <td class="parametervalue">false</td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>&#160;&#160;
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Software Assignments</h2>(none)</td>
+    </tr>
+   </table>
+  </div>
   <table class="blueBar">
    <tr>
     <td class="l">generation took 0.01 seconds</td>
-    <td class="r">rendering took 0.13 seconds</td>
+    <td class="r">rendering took 0.16 seconds</td>
    </tr>
   </table>
  </body>
