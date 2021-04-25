@@ -13,12 +13,13 @@ entity servo_control is
 end entity;
 
 architecture arch of servo_control is
-	constant scaler: std_logic_vector(7 downto 0) := x"fa"; --250
-	constant period: std_logic_vector(11 downto 0) := x"fa0"; --4000
+	constant scaler_s: integer := 9;
+	constant period_s: integer := 12;
+	constant scaler: std_logic_vector(scaler_s-1 downto 0) := "1" & x"f4"; --500
+	constant period: std_logic_vector(period_s-1 downto 0) := x"fa0"; --4000
 
 	signal ipos: std_logic_vector(7 downto 0);
-	signal value: std_logic_vector(7 downto 0);
-	signal count: std_logic_vector(11 downto 0);
+	signal count: std_logic_vector(period_s-1 downto 0);
 	signal psc, clr: std_logic;
 	begin
 		--use ipos for compare register value
@@ -29,11 +30,11 @@ architecture arch of servo_control is
 		--control outputs to servo (pin mapping?)
 		
 		--Prescaler
-		cpsc: entity work.prescaler generic map(n => 8)
+		cpsc: entity work.prescaler generic map(n => scaler_s)
 		port map(en, rst, clk, scaler, psc);
 		
 		--Count
-		ccnt: entity work.counter generic map(n => 12)
+		ccnt: entity work.counter generic map(n => period_s)
 		port map('1', en, '0', clr, psc, x"000", count);
 
 		--Clear output pulse on match
@@ -60,6 +61,7 @@ architecture arch of servo_control is
 			end if;
 		end process;
 
+		--Clamp max value
 		pipos: process(all)
 		begin
 			if unsigned(pos) > 200 then
