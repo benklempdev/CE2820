@@ -77,6 +77,15 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 		slider_switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
 		servo_control_0_export	   : out   std_logic;
 		servo_control_1_export	   : out   std_logic;
+		--Yay
+		video_lt24_controller_0_lcd_on : out   std_logic;
+		video_lt24_controller_0_reset_n : out   std_logic;
+		video_lt24_controller_0_csx : out   std_logic;
+		video_lt24_controller_0_data : out   std_logic_vector(15 downto 0);
+		video_lt24_controller_0_rdx : out   std_logic;
+		video_lt24_controller_0_wrx : out   std_logic;
+		video_lt24_controller_0_dcx : out   std_logic;
+		
 		system_pll_ref_clk_clk     : in    std_logic                     := 'X';             -- clk
 		system_pll_ref_reset_reset : in    std_logic                     := 'X'              -- reset
         );
@@ -95,7 +104,7 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 	 
 	 signal arduino_io_signal: std_logic_vector(15 downto 0);
 
-    
+    signal lt24_data: std_logic_vector(15 downto 0);
 
 
 begin 
@@ -128,6 +137,14 @@ begin
 				
 				servo_control_0_export	=> servo_control_0,
 				servo_control_1_export  => servo_control_1,
+				
+				video_lt24_controller_0_lcd_on => GPIO(35),
+				video_lt24_controller_0_reset_n => GPIO(33),
+				video_lt24_controller_0_csx => GPIO(25),
+				video_lt24_controller_0_data => lt24_data,
+				video_lt24_controller_0_rdx => GPIO(10),
+				video_lt24_controller_0_wrx => GPIO(11),
+				video_lt24_controller_0_dcx => GPIO(12),
 
 
 				sdram_addr                 => DRAM_ADDR,                 --                sdram.addr
@@ -169,11 +186,8 @@ begin
 		end if;
 	end process;
 	
-	
-	GPIO(0) <= jp1(0);
-	GPIO(15 downto 3) <= jp1(13 downto 1);
-	GPIO(17) <= jp1(14);
-	GPIO(35 downto 19) <= jp1(31 downto 15);
+	GPIO(24 downto 13) <= lt24_data(15 downto 4);
+	GPIO(5 to 8) <= lt24_data(3 downto 0);
 	
 	ARDUINO_IO <= arduino_io_signal(15 downto 11) & servo_control_1 & servo_control_0 & arduino_io_signal(8 downto 0);
 	

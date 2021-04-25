@@ -21,7 +21,14 @@ module Computer_System (
 	servo_control_1_export,
 	slider_switches_export,
 	system_pll_ref_clk_clk,
-	system_pll_ref_reset_reset);	
+	system_pll_ref_reset_reset,
+	video_lt24_controller_0_lcd_on,
+	video_lt24_controller_0_reset_n,
+	video_lt24_controller_0_csx,
+	video_lt24_controller_0_data,
+	video_lt24_controller_0_rdx,
+	video_lt24_controller_0_wrx,
+	video_lt24_controller_0_dcx);	
 
 	inout	[15:0]	arduino_gpio_export;
 	output		arduino_reset_n_export;
@@ -45,4 +52,11 @@ module Computer_System (
 	input	[9:0]	slider_switches_export;
 	input		system_pll_ref_clk_clk;
 	input		system_pll_ref_reset_reset;
+	output		video_lt24_controller_0_lcd_on;
+	output		video_lt24_controller_0_reset_n;
+	output		video_lt24_controller_0_csx;
+	output	[15:0]	video_lt24_controller_0_data;
+	output		video_lt24_controller_0_rdx;
+	output		video_lt24_controller_0_wrx;
+	output		video_lt24_controller_0_dcx;
 endmodule
