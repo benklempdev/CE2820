@@ -18,7 +18,7 @@ architecture arch of port_reg is
 		--Component output
 		pregread: process(all)
 		begin
-			if rising_edge(clk) then
+			if falling_edge(clk) then
 				if rst = '1' then
 					readdata <= (others => '0');
 				else
@@ -34,7 +34,7 @@ architecture arch of port_reg is
 		--Component input
 		pregwrite: process(all)
 		begin
-			if rising_edge(clk) then
+			if falling_edge(clk) then
 				if rst = '1' then
 					writedata <= (others => '0');
 				elsif write = '1' then
