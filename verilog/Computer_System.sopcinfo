@@ -5,11 +5,11 @@
  version="1.0"
  fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2021.04.26.15:00:48 -->
+ <!-- 2021.04.26.15:13:26 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1619467248</value>
+  <value>1619468006</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -81,6 +81,36 @@
   <valid>true</valid>
   <sysinfo_type>RESET_DOMAIN</sysinfo_type>
   <sysinfo_arg>system_pll_ref_clk</sysinfo_arg>
+ </parameter>
+ <parameter name="AUTO_VIDEO_PLL_0_REF_CLK_CLOCK_RATE">
+  <type>java.lang.Long</type>
+  <value>-1</value>
+  <derived>false</derived>
+  <enabled>true</enabled>
+  <visible>false</visible>
+  <valid>true</valid>
+  <sysinfo_type>CLOCK_RATE</sysinfo_type>
+  <sysinfo_arg>video_pll_0_ref_clk</sysinfo_arg>
+ </parameter>
+ <parameter name="AUTO_VIDEO_PLL_0_REF_CLK_CLOCK_DOMAIN">
+  <type>java.lang.Integer</type>
+  <value>-1</value>
+  <derived>false</derived>
+  <enabled>true</enabled>
+  <visible>false</visible>
+  <valid>true</valid>
+  <sysinfo_type>CLOCK_DOMAIN</sysinfo_type>
+  <sysinfo_arg>video_pll_0_ref_clk</sysinfo_arg>
+ </parameter>
+ <parameter name="AUTO_VIDEO_PLL_0_REF_CLK_RESET_DOMAIN">
+  <type>java.lang.Integer</type>
+  <value>-1</value>
+  <derived>false</derived>
+  <enabled>true</enabled>
+  <visible>false</visible>
+  <valid>true</valid>
+  <sysinfo_type>RESET_DOMAIN</sysinfo_type>
+  <sysinfo_arg>video_pll_0_ref_clk</sysinfo_arg>
  </parameter>
  <parameter name="deviceFamily">
   <type>java.lang.String</type>
@@ -11121,7 +11151,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_CLK_CLOCK_DOMAIN">
    <type>java.lang.Integer</type>
-   <value>6</value>
+   <value>8</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -11131,7 +11161,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_CLK_RESET_DOMAIN">
    <type>java.lang.Integer</type>
-   <value>6</value>
+   <value>8</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -17894,7 +17924,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1619467248</value>
+   <value>1619468006</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -17914,7 +17944,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1619467248</value>
+   <value>1619468006</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -17930,7 +17960,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1619467248</value>
+   <value>1619468006</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>
@@ -18794,12 +18824,6 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>Onchip_SRAM</moduleName>
     <slaveName>clk1</slaveName>
     <name>Onchip_SRAM.clk1</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>video_pll_0</moduleName>
-    <slaveName>ref_clk</slaveName>
-    <name>video_pll_0.ref_clk</name>
    </clockDomainMember>
   </interface>
   <interface name="sdram_clk" kind="clock_source" version="18.1">
@@ -23350,33 +23374,6 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>clk1</endConnectionPoint>
  </connection>
  <connection
-   name="System_PLL.sys_clk/video_pll_0.ref_clk"
-   kind="clock"
-   version="18.1"
-   start="System_PLL.sys_clk"
-   end="video_pll_0.ref_clk">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>System_PLL</startModule>
-  <startConnectionPoint>sys_clk</startConnectionPoint>
-  <endModule>video_pll_0</endModule>
-  <endConnectionPoint>ref_clk</endConnectionPoint>
- </connection>
- <connection
    name="Nios2.irq/Pushbuttons.irq"
    kind="interrupt"
    version="18.1"
@@ -23706,33 +23703,6 @@ parameters are a RESULT of the module parameters. -->
   <startConnectionPoint>reset_source</startConnectionPoint>
   <endModule>JTAG_to_FPGA_Bridge</endModule>
   <endConnectionPoint>clk_reset</endConnectionPoint>
- </connection>
- <connection
-   name="System_PLL.reset_source/video_pll_0.ref_reset"
-   kind="reset"
-   version="18.1"
-   start="System_PLL.reset_source"
-   end="video_pll_0.ref_reset">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>System_PLL</startModule>
-  <startConnectionPoint>reset_source</startConnectionPoint>
-  <endModule>video_pll_0</endModule>
-  <endConnectionPoint>ref_reset</endConnectionPoint>
  </connection>
  <connection
    name="System_PLL.reset_source/Nios2.reset"
@@ -24542,7 +24512,7 @@ parameters are a RESULT of the module parameters. -->
   <version>18.1</version>
  </plugin>
  <plugin>
-  <instanceCount>23</instanceCount>
+  <instanceCount>22</instanceCount>
   <name>clock</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IConnection</subtype>
@@ -24566,7 +24536,7 @@ parameters are a RESULT of the module parameters. -->
   <version>18.1</version>
  </plugin>
  <plugin>
-  <instanceCount>24</instanceCount>
+  <instanceCount>23</instanceCount>
   <name>reset</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IConnection</subtype>

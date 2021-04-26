@@ -660,6 +660,16 @@
    internal="video_lt24_controller_0.external_interface"
    type="conduit"
    dir="end" />
+ <interface
+   name="video_pll_0_ref_clk"
+   internal="video_pll_0.ref_clk"
+   type="clock"
+   dir="end" />
+ <interface
+   name="video_pll_0_ref_reset"
+   internal="video_pll_0.ref_reset"
+   type="reset"
+   dir="end" />
  <interface name="video_pll_ref_clk" internal="Video_PLL.ref_clk" />
  <interface name="video_pll_ref_reset" internal="Video_PLL.ref_reset" />
  <module name="ADC" kind="altera_up_avalon_adc" version="18.0" enabled="1">
@@ -891,8 +901,8 @@
   <parameter name="width" value="10" />
  </module>
  <module name="Nios2" kind="altera_nios2_gen2" version="18.1" enabled="1">
-  <parameter name="AUTO_CLK_CLOCK_DOMAIN" value="6" />
-  <parameter name="AUTO_CLK_RESET_DOMAIN" value="6" />
+  <parameter name="AUTO_CLK_CLOCK_DOMAIN" value="8" />
+  <parameter name="AUTO_CLK_RESET_DOMAIN" value="8" />
   <parameter name="AUTO_DEVICE" value="10M50DAF484C7G" />
   <parameter name="AUTO_DEVICE_SPEEDGRADE" value="7" />
   <parameter name="bht_ramBlockType" value="Automatic" />
@@ -2262,11 +2272,6 @@
    kind="clock"
    version="18.1"
    start="System_PLL.sys_clk"
-   end="video_pll_0.ref_clk" />
- <connection
-   kind="clock"
-   version="18.1"
-   start="System_PLL.sys_clk"
    end="VGA_Subsystem.sys_clk" />
  <connection
    kind="clock"
@@ -2400,11 +2405,6 @@
    version="18.1"
    start="System_PLL.reset_source"
    end="JTAG_to_FPGA_Bridge.clk_reset" />
- <connection
-   kind="reset"
-   version="18.1"
-   start="System_PLL.reset_source"
-   end="video_pll_0.ref_reset" />
  <connection
    kind="reset"
    version="18.1"

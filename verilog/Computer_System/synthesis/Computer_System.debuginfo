@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="Computer_System" kind="system" version="18.1" fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2021.04.26.15:01:33 -->
+ <!-- 2021.04.26.15:14:17 -->
  <!-- A collection of modules and connections -->
  <parameter name="clockCrossingAdapter">
   <type>com.altera.sopcmodel.ensemble.EClockAdapter</type>
@@ -53,7 +53,7 @@
  </parameter>
  <parameter name="generationId">
   <type>int</type>
-  <value>1619467248</value>
+  <value>1619468006</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>true</visible>
@@ -11033,7 +11033,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_CLK_CLOCK_DOMAIN">
    <type>java.lang.Integer</type>
-   <value>6</value>
+   <value>8</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -11043,7 +11043,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_CLK_RESET_DOMAIN">
    <type>java.lang.Integer</type>
-   <value>6</value>
+   <value>8</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -17611,7 +17611,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1619467248</value>
+   <value>1619468006</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -17631,7 +17631,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1619467248</value>
+   <value>1619468006</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -17647,7 +17647,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1619467248</value>
+   <value>1619468006</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>
@@ -18511,12 +18511,6 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>Onchip_SRAM</moduleName>
     <slaveName>clk1</slaveName>
     <name>Onchip_SRAM.clk1</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>video_pll_0</moduleName>
-    <slaveName>ref_clk</slaveName>
-    <name>video_pll_0.ref_clk</name>
    </clockDomainMember>
    <clockDomainMember>
     <isBridge>false</isBridge>
@@ -32715,33 +32709,6 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>clk1</endConnectionPoint>
  </connection>
  <connection
-   name="System_PLL.sys_clk/video_pll_0.ref_clk"
-   kind="clock"
-   version="18.1"
-   start="System_PLL.sys_clk"
-   end="video_pll_0.ref_clk">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>System_PLL</startModule>
-  <startConnectionPoint>sys_clk</startConnectionPoint>
-  <endModule>video_pll_0</endModule>
-  <endConnectionPoint>ref_clk</endConnectionPoint>
- </connection>
- <connection
    name="System_PLL.reset_source/JTAG_to_FPGA_Bridge.clk_reset"
    kind="reset"
    version="18.1"
@@ -35508,60 +35475,6 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>in_reset</endConnectionPoint>
  </connection>
  <connection
-   name="rst_translator.out_reset/video_pll_0.ref_reset"
-   kind="reset"
-   version="18.1"
-   start="rst_translator.out_reset"
-   end="video_pll_0.ref_reset">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>rst_translator</startModule>
-  <startConnectionPoint>out_reset</startConnectionPoint>
-  <endModule>video_pll_0</endModule>
-  <endConnectionPoint>ref_reset</endConnectionPoint>
- </connection>
- <connection
-   name="rst_controller.reset_out/rst_translator.in_reset"
-   kind="reset"
-   version="18.1"
-   start="rst_controller.reset_out"
-   end="rst_translator.in_reset">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>rst_controller</startModule>
-  <startConnectionPoint>reset_out</startConnectionPoint>
-  <endModule>rst_translator</endModule>
-  <endConnectionPoint>in_reset</endConnectionPoint>
- </connection>
- <connection
    name="rst_translator.out_reset/mm_interconnect_0.ADC_reset_reset_bridge_in_reset"
    kind="reset"
    version="18.1"
@@ -36309,7 +36222,7 @@ parameters are a RESULT of the module parameters. -->
   <version>18.1</version>
  </plugin>
  <plugin>
-  <instanceCount>23</instanceCount>
+  <instanceCount>22</instanceCount>
   <name>clock</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IConnection</subtype>
@@ -36357,7 +36270,7 @@ parameters are a RESULT of the module parameters. -->
   <version>18.1</version>
  </plugin>
  <plugin>
-  <instanceCount>51</instanceCount>
+  <instanceCount>49</instanceCount>
   <name>reset</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IConnection</subtype>
@@ -36365,5 +36278,5 @@ parameters are a RESULT of the module parameters. -->
   <version>18.1</version>
  </plugin>
  <reportVersion>18.1 625</reportVersion>
- <uniqueIdentifier>0A0027000003000001790FC53B93</uniqueIdentifier>
+ <uniqueIdentifier>0A0027000003000001790FD0CBEB</uniqueIdentifier>
 </EnsembleReport>

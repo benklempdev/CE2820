@@ -36,7 +36,9 @@ entity Computer_System is
 		video_lt24_controller_0_data    : out   std_logic_vector(15 downto 0);                    --                        .data
 		video_lt24_controller_0_rdx     : out   std_logic;                                        --                        .rdx
 		video_lt24_controller_0_wrx     : out   std_logic;                                        --                        .wrx
-		video_lt24_controller_0_dcx     : out   std_logic                                         --                        .dcx
+		video_lt24_controller_0_dcx     : out   std_logic;                                        --                        .dcx
+		video_pll_0_ref_clk_clk         : in    std_logic                     := '0';             --     video_pll_0_ref_clk.clk
+		video_pll_0_ref_reset_reset     : in    std_logic                     := '0'              --   video_pll_0_ref_reset.reset
 	);
 end entity Computer_System;
 
@@ -914,7 +916,7 @@ architecture rtl of Computer_System is
 	signal video_pixel_buffer_dma_0_avalon_pixel_source_startofpacket                 : std_logic;                     -- video_pixel_buffer_dma_0:stream_startofpacket -> video_lt24_controller_0:startofpacket
 	signal video_pixel_buffer_dma_0_avalon_pixel_source_endofpacket                   : std_logic;                     -- video_pixel_buffer_dma_0:stream_endofpacket -> video_lt24_controller_0:endofpacket
 	signal video_pll_0_lcd_clk_clk                                                    : std_logic;                     -- video_pll_0:lcd_clk_clk -> [mm_interconnect_0:video_pll_0_lcd_clk_clk, rst_controller_002:clk, video_lt24_controller_0:clk, video_pixel_buffer_dma_0:clk]
-	signal system_pll_sys_clk_clk                                                     : std_logic;                     -- System_PLL:sys_clk_clk -> [ADC:clock, Arduino_GPIO:clk, Arduino_Reset_N:clk, Expansion_JP1:clk, HEX3_HEX0:clk, HEX5_HEX4:clk, Interval_Timer:clk, Interval_Timer_2:clk, JTAG_UART:clk, JTAG_UART_2nd_Core:clk, JTAG_to_FPGA_Bridge:clk_clk, LEDs:clk, Nios2:clk, Onchip_SRAM:clk, Pushbuttons:clk, SDRAM:clk, Servo0:clk, Servo1:clk, Slider_Switches:clk, SysID:clock, irq_mapper:clk, mm_interconnect_0:System_PLL_sys_clk_clk, rst_controller:clk, rst_controller_001:clk, video_pll_0:ref_clk_clk]
+	signal system_pll_sys_clk_clk                                                     : std_logic;                     -- System_PLL:sys_clk_clk -> [ADC:clock, Arduino_GPIO:clk, Arduino_Reset_N:clk, Expansion_JP1:clk, HEX3_HEX0:clk, HEX5_HEX4:clk, Interval_Timer:clk, Interval_Timer_2:clk, JTAG_UART:clk, JTAG_UART_2nd_Core:clk, JTAG_to_FPGA_Bridge:clk_clk, LEDs:clk, Nios2:clk, Onchip_SRAM:clk, Pushbuttons:clk, SDRAM:clk, Servo0:clk, Servo1:clk, Slider_Switches:clk, SysID:clock, irq_mapper:clk, mm_interconnect_0:System_PLL_sys_clk_clk, rst_controller:clk, rst_controller_001:clk]
 	signal system_pll_reset_source_reset                                              : std_logic;                     -- System_PLL:reset_source_reset -> [JTAG_to_FPGA_Bridge:clk_reset_reset, rst_controller:reset_in0, rst_controller_001:reset_in1]
 	signal nios2_custom_instruction_master_readra                                     : std_logic;                     -- Nios2:D_ci_readra -> Nios2_custom_instruction_master_translator:ci_slave_readra
 	signal nios2_custom_instruction_master_a                                          : std_logic_vector(4 downto 0);  -- Nios2:D_ci_a -> Nios2_custom_instruction_master_translator:ci_slave_a
@@ -1115,7 +1117,7 @@ architecture rtl of Computer_System is
 	signal irq_mapper_receiver4_irq                                                   : std_logic;                     -- Interval_Timer:irq -> irq_mapper:receiver4_irq
 	signal irq_mapper_receiver5_irq                                                   : std_logic;                     -- Interval_Timer_2:irq -> irq_mapper:receiver5_irq
 	signal nios2_irq_irq                                                              : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> Nios2:irq
-	signal rst_controller_reset_out_reset                                             : std_logic;                     -- rst_controller:reset_out -> [ADC:reset, Onchip_SRAM:reset, Servo0:rst, Servo1:rst, mm_interconnect_0:ADC_reset_reset_bridge_in_reset_reset, mm_interconnect_0:JTAG_to_FPGA_Bridge_clk_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset, video_pll_0:ref_reset_reset]
+	signal rst_controller_reset_out_reset                                             : std_logic;                     -- rst_controller:reset_out -> [ADC:reset, Onchip_SRAM:reset, Servo0:rst, Servo1:rst, mm_interconnect_0:ADC_reset_reset_bridge_in_reset_reset, mm_interconnect_0:JTAG_to_FPGA_Bridge_clk_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                                         : std_logic;                     -- rst_controller:reset_req -> [Onchip_SRAM:reset_req, rst_translator:reset_req_in]
 	signal rst_controller_001_reset_out_reset                                         : std_logic;                     -- rst_controller_001:reset_out -> [irq_mapper:reset, mm_interconnect_0:Nios2_reset_reset_bridge_in_reset_reset, rst_controller_001_reset_out_reset:in]
 	signal nios2_debug_reset_request_reset                                            : std_logic;                     -- Nios2:debug_reset_request -> rst_controller_001:reset_in0
@@ -1526,8 +1528,8 @@ begin
 
 	video_pll_0 : component Computer_System_video_pll_0
 		port map (
-			ref_clk_clk        => system_pll_sys_clk_clk,         --      ref_clk.clk
-			ref_reset_reset    => rst_controller_reset_out_reset, --    ref_reset.reset
+			ref_clk_clk        => video_pll_0_ref_clk_clk,        --      ref_clk.clk
+			ref_reset_reset    => video_pll_0_ref_reset_reset,    --    ref_reset.reset
 			lcd_clk_clk        => video_pll_0_lcd_clk_clk,        --      lcd_clk.clk
 			reset_source_reset => video_pll_0_reset_source_reset  -- reset_source.reset
 		);
