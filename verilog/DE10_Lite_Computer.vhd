@@ -85,8 +85,8 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 		video_lt24_controller_0_rdx : out   std_logic;
 		video_lt24_controller_0_wrx : out   std_logic;
 		video_lt24_controller_0_dcx : out   std_logic;
-		video_pll_0_ref_clk			: in    std_logic;
-		video_pll_0_ref_reset		: in    std_logic;
+		video_pll_0_ref_clk_clk		: in    std_logic;
+		video_pll_0_ref_reset_reset: in    std_logic;
 		
 		system_pll_ref_clk_clk     : in    std_logic                     := 'X';             -- clk
 		system_pll_ref_reset_reset : in    std_logic                     := 'X'              -- reset
@@ -148,8 +148,8 @@ begin
 				video_lt24_controller_0_wrx => GPIO(11),
 				video_lt24_controller_0_dcx => GPIO(12),
 				
-				video_pll_0_ref_clk			=> CLOCK_50,
-				video_pll_0_ref_reset		=> '0',
+				video_pll_0_ref_clk_clk		=> CLOCK_50,
+				video_pll_0_ref_reset_reset=> '0',
 
 
 				sdram_addr                 => DRAM_ADDR,                 --                sdram.addr
