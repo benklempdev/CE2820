@@ -187,7 +187,10 @@ begin
 	end process;
 	
 	GPIO(24 downto 13) <= lt24_data(15 downto 4);
-	GPIO(5 to 8) <= lt24_data(3 downto 0);
+	GPIO(5) <= lt24_data(3);
+	GPIO(6) <= lt24_data(2);
+	GPIO(7) <= lt24_data(1);
+	GPIO(8) <= lt24_data(0);
 	
 	ARDUINO_IO <= arduino_io_signal(15 downto 11) & servo_control_1 & servo_control_0 & arduino_io_signal(8 downto 0);
 	
