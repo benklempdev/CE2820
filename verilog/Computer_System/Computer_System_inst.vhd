@@ -30,7 +30,8 @@
 			video_lt24_controller_0_wrx     : out   std_logic;                                        -- wrx
 			video_lt24_controller_0_dcx     : out   std_logic;                                        -- dcx
 			video_pll_0_ref_clk_clk         : in    std_logic                     := 'X';             -- clk
-			video_pll_0_ref_reset_reset     : in    std_logic                     := 'X'              -- reset
+			video_pll_0_ref_reset_reset     : in    std_logic                     := 'X';             -- reset
+			blinky_export                   : out   std_logic                                         -- export
 		);
 	end component Computer_System;
 
@@ -66,6 +67,7 @@
 			video_lt24_controller_0_wrx     => CONNECTED_TO_video_lt24_controller_0_wrx,     --                        .wrx
 			video_lt24_controller_0_dcx     => CONNECTED_TO_video_lt24_controller_0_dcx,     --                        .dcx
 			video_pll_0_ref_clk_clk         => CONNECTED_TO_video_pll_0_ref_clk_clk,         --     video_pll_0_ref_clk.clk
-			video_pll_0_ref_reset_reset     => CONNECTED_TO_video_pll_0_ref_reset_reset      --   video_pll_0_ref_reset.reset
+			video_pll_0_ref_reset_reset     => CONNECTED_TO_video_pll_0_ref_reset_reset,     --   video_pll_0_ref_reset.reset
+			blinky_export                   => CONNECTED_TO_blinky_export                    --                  blinky.export
 		);
 

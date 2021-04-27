@@ -30,7 +30,8 @@ module Computer_System (
 	video_lt24_controller_0_wrx,
 	video_lt24_controller_0_dcx,
 	video_pll_0_ref_clk_clk,
-	video_pll_0_ref_reset_reset);	
+	video_pll_0_ref_reset_reset,
+	blinky_export);	
 
 	inout	[15:0]	arduino_gpio_export;
 	output		arduino_reset_n_export;
@@ -63,4 +64,5 @@ module Computer_System (
 	output		video_lt24_controller_0_dcx;
 	input		video_pll_0_ref_clk_clk;
 	input		video_pll_0_ref_reset_reset;
+	output		blinky_export;
 endmodule
