@@ -18,7 +18,7 @@ architecture arch of servo_control is
 	constant scaler: std_logic_vector(scaler_s-1 downto 0) := "1" & x"f4"; --500
 	constant period: std_logic_vector(period_s-1 downto 0) := x"fa0"; --4000
 
-	signal ipos: std_logic_vector(7 downto 0);
+	signal cpos, ipos: std_logic_vector(7 downto 0);
 	signal count: std_logic_vector(period_s-1 downto 0);
 	signal psc, clr: std_logic;
 	begin
@@ -62,12 +62,20 @@ architecture arch of servo_control is
 		end process;
 
 		--Clamp max value
-		pipos: process(all)
+		pcpos: process(all)
 		begin
 			if unsigned(pos) > 200 then
-				ipos <= x"c8";
+				cpos <= x"c8";
 			else
-				ipos <= pos;
+				cpos <= pos;
+			end if;
+		end process;
+		
+		--Only change value at period border
+		pipos: process(all)
+		begin
+			if clr = '1' then
+				ipos <= cpos;
 			end if;
 		end process;
 end architecture;
