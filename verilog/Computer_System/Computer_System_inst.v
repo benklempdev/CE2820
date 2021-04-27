@@ -1,6 +1,7 @@
 	Computer_System u0 (
 		.arduino_gpio_export             (<connected-to-arduino_gpio_export>),             //            arduino_gpio.export
 		.arduino_reset_n_export          (<connected-to-arduino_reset_n_export>),          //         arduino_reset_n.export
+		.blinky_export                   (<connected-to-blinky_export>),                   //                  blinky.export
 		.expansion_jp1_export            (<connected-to-expansion_jp1_export>),            //           expansion_jp1.export
 		.hex3_hex0_export                (<connected-to-hex3_hex0_export>),                //               hex3_hex0.export
 		.hex5_hex4_export                (<connected-to-hex5_hex4_export>),                //               hex5_hex4.export
@@ -29,7 +30,6 @@
 		.video_lt24_controller_0_wrx     (<connected-to-video_lt24_controller_0_wrx>),     //                        .wrx
 		.video_lt24_controller_0_dcx     (<connected-to-video_lt24_controller_0_dcx>),     //                        .dcx
 		.video_pll_0_ref_clk_clk         (<connected-to-video_pll_0_ref_clk_clk>),         //     video_pll_0_ref_clk.clk
-		.video_pll_0_ref_reset_reset     (<connected-to-video_pll_0_ref_reset_reset>),     //   video_pll_0_ref_reset.reset
-		.blinky_export                   (<connected-to-blinky_export>)                    //                  blinky.export
+		.video_pll_0_ref_reset_reset     (<connected-to-video_pll_0_ref_reset_reset>)      //   video_pll_0_ref_reset.reset
 	);
 

@@ -2,6 +2,7 @@
 module Computer_System (
 	arduino_gpio_export,
 	arduino_reset_n_export,
+	blinky_export,
 	expansion_jp1_export,
 	hex3_hex0_export,
 	hex5_hex4_export,
@@ -30,11 +31,11 @@ module Computer_System (
 	video_lt24_controller_0_wrx,
 	video_lt24_controller_0_dcx,
 	video_pll_0_ref_clk_clk,
-	video_pll_0_ref_reset_reset,
-	blinky_export);	
+	video_pll_0_ref_reset_reset);	
 
 	inout	[15:0]	arduino_gpio_export;
 	output		arduino_reset_n_export;
+	output		blinky_export;
 	inout	[31:0]	expansion_jp1_export;
 	output	[31:0]	hex3_hex0_export;
 	output	[31:0]	hex5_hex4_export;
@@ -64,5 +65,4 @@ module Computer_System (
 	output		video_lt24_controller_0_dcx;
 	input		video_pll_0_ref_clk_clk;
 	input		video_pll_0_ref_reset_reset;
-	output		blinky_export;
 endmodule
