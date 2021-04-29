@@ -20,18 +20,18 @@ architecture arch of servo_control is
 
 	signal cpos, ipos: std_logic_vector(7 downto 0);
 	signal count: std_logic_vector(period_s-1 downto 0);
-	signal psc, clr: std_logic;
+	signal psc, irst, clr: std_logic;
 	begin
 		--use ipos for compare register value
 		--keep internal count
 		--run counter on en
 		--load sets compare register
-		--reset all on rst
+		--reset all on irst
 		--control outputs to servo (pin mapping?)
 		
 		--Prescaler
 		cpsc: entity work.prescaler generic map(n => scaler_s)
-		port map(en, rst, clk, scaler, psc);
+		port map(en, irst, clk, scaler, psc);
 		
 		--Count
 		ccnt: entity work.counter generic map(n => period_s)
@@ -40,7 +40,7 @@ architecture arch of servo_control is
 		--Clear output pulse on match
 		pctrl: process(all)
 		begin
-			if rst = '1' then
+			if irst = '1' then
 				control <= '0';
 			elsif rising_edge(clk) then
 				if unsigned(x"0"&ipos) + 200 = unsigned(count) then
@@ -54,7 +54,7 @@ architecture arch of servo_control is
 		--Clear signal for counter
 		pclr: process(all)
 		begin
-			if rst = '1' or period = count then
+			if irst = '1' or period = count then
 				clr <= '1';
 			else
 				clr <= '0';
@@ -76,6 +76,15 @@ architecture arch of servo_control is
 		begin
 			if clr = '1' then
 				ipos <= cpos;
+			end if;
+		end process;
+
+		pirst: process(all)
+		begin
+			if rst = '1' or ipos = x"00" then
+				irst <= '1';
+			else
+				irst <= '0';
 			end if;
 		end process;
 end architecture;

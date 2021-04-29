@@ -110,6 +110,7 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 	 signal jp1 : std_logic_vector(31 downto 0);
 	 
 	 signal servo_control_0, servo_control_1: std_logic;
+	 signal iservo_input_0, iservo_input_1: std_logic_vector(15 downto 0);
 	 signal iservo_control_0, iservo_control_1: std_logic;
 	 signal blinky: std_logic;
 	 
@@ -162,8 +163,8 @@ begin
 				
 				blinky_export					=> blinky,
 				
-				iservo_control_0_export		=> iservo_control_0,
-				iservo_control_1_export		=> iservo_control_1,
+				iservo_control_0_export		=> iservo_input_0,
+				iservo_control_1_export		=> iservo_input_1,
 
 
 				sdram_addr                 => DRAM_ADDR,                 --                sdram.addr
@@ -205,13 +206,16 @@ begin
 		end if;
 	end process;
 	
+	cservo0: entity work.servo_control port map(iservo_input_0(8), '0', clock_50, iservo_input_0(7 downto 0), iservo_control_0);
+	cservo1: entity work.servo_control port map(iservo_input_1(8), '0', clock_50, iservo_input_1(7 downto 0), iservo_control_1);
+	
 	GPIO(24 downto 13) <= lt24_data(15 downto 4);
 	GPIO(5) <= lt24_data(3);
 	GPIO(6) <= lt24_data(2);
 	GPIO(7) <= lt24_data(1);
 	GPIO(8) <= lt24_data(0);
 	
-	ARDUINO_IO <= arduino_io_signal(15 downto 13) & '1' & blinky & servo_control_1 & servo_control_0 & arduino_io_signal(8 downto 0);
+	ARDUINO_IO <= arduino_io_signal(15 downto 13) & '1' & blinky & iservo_control_1 & iservo_control_0 & arduino_io_signal(8 downto 0);
 	
 	
 end architecture STRUCTURAL;
