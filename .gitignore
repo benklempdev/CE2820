@@ -8,6 +8,8 @@ verilog/incremental_db/*
 *.bak
 *.qws
 
+*.swp
+
 #Ignore everthing from components except the vhd files
 components/*
 !components/lib/
