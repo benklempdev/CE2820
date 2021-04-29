@@ -1,5 +1,5 @@
 -- altera vhdl_input_version vhdl_2008
--- Use x250 prescaler (200 cycles per 1ms on 50MHz clock)
+-- Use x500 prescaler (200 cycles per 1ms on 50MHz clock)
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

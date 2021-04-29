@@ -298,7 +298,7 @@ refer to the applicable agreement for further details.
 		(text "clk" (rect 197 891 412 1792)(font "Arial" (color 0 0 0)))
 		(text "video_pll_0_ref_reset" (rect 64 907 254 1827)(font "Arial" (color 128 0 0)(font_size 9)))
 		(text "reset" (rect 197 931 424 1872)(font "Arial" (color 0 0 0)))
-		(text " system " (rect 413 952 874 1914)(font "Arial" ))
+		(text " Computer_System " (rect 364 952 830 1914)(font "Arial" ))
 		(line (pt 192 32)(pt 256 32)(line_width 1))
 		(line (pt 256 32)(pt 256 952)(line_width 1))
 		(line (pt 192 952)(pt 256 952)(line_width 1))
