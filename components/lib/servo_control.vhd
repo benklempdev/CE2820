@@ -81,7 +81,7 @@ architecture arch of servo_control is
 
 		pirst: process(all)
 		begin
-			if rst = '1' or ipos = x"00" then
+			if rst = '1' or ipos = x"ff" then
 				irst <= '1';
 			else
 				irst <= '0';
