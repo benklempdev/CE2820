@@ -91,6 +91,10 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 		--Testing
 		blinky_export					: out   std_logic;
 		
+		--Servo passthrough
+		iservo_control_0_export		: out   std_logic;
+		iservo_control_1_export		: out   std_logic;
+		
 		system_pll_ref_clk_clk     : in    std_logic                     := 'X';             -- clk
 		system_pll_ref_reset_reset : in    std_logic                     := 'X'              -- reset
         );
@@ -106,6 +110,7 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 	 signal jp1 : std_logic_vector(31 downto 0);
 	 
 	 signal servo_control_0, servo_control_1: std_logic;
+	 signal iservo_control_0, iservo_control_1: std_logic;
 	 signal blinky: std_logic;
 	 
 	 signal arduino_io_signal: std_logic_vector(15 downto 0);
@@ -156,6 +161,9 @@ begin
 				video_pll_0_ref_reset_reset=> '0',
 				
 				blinky_export					=> blinky,
+				
+				iservo_control_0_export		=> iservo_control_0,
+				iservo_control_1_export		=> iservo_control_1,
 
 
 				sdram_addr                 => DRAM_ADDR,                 --                sdram.addr
