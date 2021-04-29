@@ -31,9 +31,7 @@
 			video_lt24_controller_0_wrx     : out   std_logic;                                        -- wrx
 			video_lt24_controller_0_dcx     : out   std_logic;                                        -- dcx
 			video_pll_0_ref_clk_clk         : in    std_logic                     := 'X';             -- clk
-			video_pll_0_ref_reset_reset     : in    std_logic                     := 'X';             -- reset
-			iservo_control_0_export         : out   std_logic_vector(15 downto 0);                    -- export
-			iservo_control_1_export         : out   std_logic_vector(15 downto 0)                     -- export
+			video_pll_0_ref_reset_reset     : in    std_logic                     := 'X'              -- reset
 		);
 	end component Computer_System;
 
@@ -70,8 +68,6 @@
 			video_lt24_controller_0_wrx     => CONNECTED_TO_video_lt24_controller_0_wrx,     --                        .wrx
 			video_lt24_controller_0_dcx     => CONNECTED_TO_video_lt24_controller_0_dcx,     --                        .dcx
 			video_pll_0_ref_clk_clk         => CONNECTED_TO_video_pll_0_ref_clk_clk,         --     video_pll_0_ref_clk.clk
-			video_pll_0_ref_reset_reset     => CONNECTED_TO_video_pll_0_ref_reset_reset,     --   video_pll_0_ref_reset.reset
-			iservo_control_0_export         => CONNECTED_TO_iservo_control_0_export,         --        iservo_control_0.export
-			iservo_control_1_export         => CONNECTED_TO_iservo_control_1_export          --        iservo_control_1.export
+			video_pll_0_ref_reset_reset     => CONNECTED_TO_video_pll_0_ref_reset_reset      --   video_pll_0_ref_reset.reset
 		);
 
