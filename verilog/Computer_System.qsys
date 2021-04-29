@@ -1382,8 +1382,8 @@
   <parameter name="registerDataIn" value="true" />
   <parameter name="rowWidth" value="13" />
  </module>
- <module name="Servo0" kind="servo_control" version="1.4" enabled="1" />
- <module name="Servo1" kind="servo_control" version="1.4" enabled="1" />
+ <module name="Servo0" kind="servo_control" version="1.5" enabled="1" />
+ <module name="Servo1" kind="servo_control" version="1.5" enabled="1" />
  <module
    name="Slider_Switches"
    kind="altera_avalon_pio"

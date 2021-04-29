@@ -43,7 +43,7 @@ architecture arch of servo_control is
 			if irst = '1' then
 				control <= '0';
 			elsif rising_edge(clk) then
-				if unsigned(x"0"&ipos) + 200 = unsigned(count) then
+				if unsigned(x"0"&cpos) + 200 = unsigned(count) then
 					control <= '0';
 				elsif en = '1' and count = x"000" then
 					control <= '1';
@@ -64,10 +64,10 @@ architecture arch of servo_control is
 		--Clamp max value
 		pcpos: process(all)
 		begin
-			if unsigned(pos) > 200 then
+			if unsigned(ipos) > 200 then
 				cpos <= x"c8";
 			else
-				cpos <= pos;
+				cpos <= ipos;
 			end if;
 		end process;
 		
@@ -75,13 +75,13 @@ architecture arch of servo_control is
 		pipos: process(all)
 		begin
 			if clr = '1' then
-				ipos <= cpos;
+				ipos <= pos;
 			end if;
 		end process;
 
 		pirst: process(all)
 		begin
-			if rst = '1' or ipos = x"ff" then
+			if rst = '1' or pos = x"ff" then
 				irst <= '1';
 			else
 				irst <= '0';
