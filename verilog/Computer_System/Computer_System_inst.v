@@ -30,6 +30,8 @@
 		.video_lt24_controller_0_wrx     (<connected-to-video_lt24_controller_0_wrx>),     //                        .wrx
 		.video_lt24_controller_0_dcx     (<connected-to-video_lt24_controller_0_dcx>),     //                        .dcx
 		.video_pll_0_ref_clk_clk         (<connected-to-video_pll_0_ref_clk_clk>),         //     video_pll_0_ref_clk.clk
-		.video_pll_0_ref_reset_reset     (<connected-to-video_pll_0_ref_reset_reset>)      //   video_pll_0_ref_reset.reset
+		.video_pll_0_ref_reset_reset     (<connected-to-video_pll_0_ref_reset_reset>),     //   video_pll_0_ref_reset.reset
+		.iservo_input_0_export           (<connected-to-iservo_input_0_export>),           //          iservo_input_0.export
+		.iservo_input_1_export           (<connected-to-iservo_input_1_export>)            //          iservo_input_1.export
 	);
 
