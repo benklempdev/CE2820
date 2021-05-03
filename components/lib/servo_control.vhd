@@ -20,7 +20,7 @@ architecture arch of servo_control is
 
 	signal cpos, ipos: std_logic_vector(7 downto 0);
 	signal count: std_logic_vector(period_s-1 downto 0);
-	signal psc, irst, clr: std_logic;
+	signal psc, irst, clr, peqc: std_logic;
 	begin
 		--use ipos for compare register value
 		--keep internal count
@@ -50,16 +50,19 @@ architecture arch of servo_control is
 				end if;
 			end if;
 		end process;
-
-		--Clear signal for counter
-		pclr: process(all)
+		
+		--Equality check
+		ppeqc: process(all)
 		begin
-			if irst = '1' or period = count then
-				clr <= '1';
+			if period = count then
+				peqc <= '1';
 			else
-				clr <= '0';
+				peqc <= '0';
 			end if;
 		end process;
+
+		--Clear signal for counter
+		clr <= irst or peqc;
 
 		--Clamp max value
 		pcpos: process(all)
