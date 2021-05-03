@@ -49,14 +49,14 @@ module Computer_System_mm_interconnect_0_router_008_default_decode
                DEFAULT_RD_CHANNEL = -1,
                DEFAULT_DESTID = 1 
    )
-  (output [98 - 94 : 0] default_destination_id,
+  (output [71 - 67 : 0] default_destination_id,
    output [23-1 : 0] default_wr_channel,
    output [23-1 : 0] default_rd_channel,
    output [23-1 : 0] default_src_channel
   );
 
   assign default_destination_id = 
-    DEFAULT_DESTID[98 - 94 : 0];
+    DEFAULT_DESTID[71 - 67 : 0];
 
   generate
     if (DEFAULT_CHANNEL == -1) begin : no_default_channel_assignment
@@ -93,7 +93,7 @@ module Computer_System_mm_interconnect_0_router_008
     // Command Sink (Input)
     // -------------------
     input                       sink_valid,
-    input  [112-1 : 0]    sink_data,
+    input  [85-1 : 0]    sink_data,
     input                       sink_startofpacket,
     input                       sink_endofpacket,
     output                      sink_ready,
@@ -102,7 +102,7 @@ module Computer_System_mm_interconnect_0_router_008
     // Command Source (Output)
     // -------------------
     output                          src_valid,
-    output reg [112-1    : 0] src_data,
+    output reg [85-1    : 0] src_data,
     output reg [23-1 : 0] src_channel,
     output                          src_startofpacket,
     output                          src_endofpacket,
@@ -112,18 +112,18 @@ module Computer_System_mm_interconnect_0_router_008
     // -------------------------------------------------------
     // Local parameters and variables
     // -------------------------------------------------------
-    localparam PKT_ADDR_H = 67;
-    localparam PKT_ADDR_L = 36;
-    localparam PKT_DEST_ID_H = 98;
-    localparam PKT_DEST_ID_L = 94;
-    localparam PKT_PROTECTION_H = 102;
-    localparam PKT_PROTECTION_L = 100;
-    localparam ST_DATA_W = 112;
+    localparam PKT_ADDR_H = 40;
+    localparam PKT_ADDR_L = 9;
+    localparam PKT_DEST_ID_H = 71;
+    localparam PKT_DEST_ID_L = 67;
+    localparam PKT_PROTECTION_H = 75;
+    localparam PKT_PROTECTION_L = 73;
+    localparam ST_DATA_W = 85;
     localparam ST_CHANNEL_W = 23;
     localparam DECODER_TYPE = 1;
 
-    localparam PKT_TRANS_WRITE = 70;
-    localparam PKT_TRANS_READ  = 71;
+    localparam PKT_TRANS_WRITE = 43;
+    localparam PKT_TRANS_READ  = 44;
 
     localparam PKT_ADDR_W = PKT_ADDR_H-PKT_ADDR_L + 1;
     localparam PKT_DEST_ID_W = PKT_DEST_ID_H-PKT_DEST_ID_L + 1;
@@ -163,11 +163,6 @@ module Computer_System_mm_interconnect_0_router_008
 
 
 
-    // -------------------------------------------------------
-    // Write and read transaction signals
-    // -------------------------------------------------------
-    wire read_transaction;
-    assign read_transaction  = sink_data[PKT_TRANS_READ];
 
 
     Computer_System_mm_interconnect_0_router_008_default_decode the_default_decode(
@@ -193,7 +188,7 @@ module Computer_System_mm_interconnect_0_router_008
             src_channel = 23'b01;
         end
 
-        if (destid == 2  && read_transaction) begin
+        if (destid == 0 ) begin
             src_channel = 23'b10;
         end
 

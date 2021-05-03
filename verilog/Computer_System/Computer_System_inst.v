@@ -5,6 +5,8 @@
 		.expansion_jp1_export            (<connected-to-expansion_jp1_export>),            //           expansion_jp1.export
 		.hex3_hex0_export                (<connected-to-hex3_hex0_export>),                //               hex3_hex0.export
 		.hex5_hex4_export                (<connected-to-hex5_hex4_export>),                //               hex5_hex4.export
+		.iservo_input_0_export           (<connected-to-iservo_input_0_export>),           //          iservo_input_0.export
+		.iservo_input_1_export           (<connected-to-iservo_input_1_export>),           //          iservo_input_1.export
 		.leds_export                     (<connected-to-leds_export>),                     //                    leds.export
 		.pushbuttons_export              (<connected-to-pushbuttons_export>),              //             pushbuttons.export
 		.sdram_addr                      (<connected-to-sdram_addr>),                      //                   sdram.addr
@@ -30,8 +32,6 @@
 		.video_lt24_controller_0_wrx     (<connected-to-video_lt24_controller_0_wrx>),     //                        .wrx
 		.video_lt24_controller_0_dcx     (<connected-to-video_lt24_controller_0_dcx>),     //                        .dcx
 		.video_pll_0_ref_clk_clk         (<connected-to-video_pll_0_ref_clk_clk>),         //     video_pll_0_ref_clk.clk
-		.video_pll_0_ref_reset_reset     (<connected-to-video_pll_0_ref_reset_reset>),     //   video_pll_0_ref_reset.reset
-		.iservo_input_0_export           (<connected-to-iservo_input_0_export>),           //          iservo_input_0.export
-		.iservo_input_1_export           (<connected-to-iservo_input_1_export>)            //          iservo_input_1.export
+		.video_pll_0_ref_reset_reset     (<connected-to-video_pll_0_ref_reset_reset>)      //   video_pll_0_ref_reset.reset
 	);
 

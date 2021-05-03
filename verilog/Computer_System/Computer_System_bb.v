@@ -6,6 +6,8 @@ module Computer_System (
 	expansion_jp1_export,
 	hex3_hex0_export,
 	hex5_hex4_export,
+	iservo_input_0_export,
+	iservo_input_1_export,
 	leds_export,
 	pushbuttons_export,
 	sdram_addr,
@@ -31,9 +33,7 @@ module Computer_System (
 	video_lt24_controller_0_wrx,
 	video_lt24_controller_0_dcx,
 	video_pll_0_ref_clk_clk,
-	video_pll_0_ref_reset_reset,
-	iservo_input_0_export,
-	iservo_input_1_export);	
+	video_pll_0_ref_reset_reset);	
 
 	inout	[15:0]	arduino_gpio_export;
 	output		arduino_reset_n_export;
@@ -41,6 +41,8 @@ module Computer_System (
 	inout	[31:0]	expansion_jp1_export;
 	output	[31:0]	hex3_hex0_export;
 	output	[31:0]	hex5_hex4_export;
+	output	[15:0]	iservo_input_0_export;
+	output	[15:0]	iservo_input_1_export;
 	output	[9:0]	leds_export;
 	input	[1:0]	pushbuttons_export;
 	output	[12:0]	sdram_addr;
@@ -67,6 +69,4 @@ module Computer_System (
 	output		video_lt24_controller_0_dcx;
 	input		video_pll_0_ref_clk_clk;
 	input		video_pll_0_ref_reset_reset;
-	output	[15:0]	iservo_input_0_export;
-	output	[15:0]	iservo_input_1_export;
 endmodule

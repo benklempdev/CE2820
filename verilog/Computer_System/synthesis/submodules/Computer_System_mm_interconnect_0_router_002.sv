@@ -44,7 +44,7 @@
 
 module Computer_System_mm_interconnect_0_router_002_default_decode
   #(
-     parameter DEFAULT_CHANNEL = 1,
+     parameter DEFAULT_CHANNEL = 0,
                DEFAULT_WR_CHANNEL = -1,
                DEFAULT_RD_CHANNEL = -1,
                DEFAULT_DESTID = 14 
@@ -192,7 +192,7 @@ module Computer_System_mm_interconnect_0_router_002
 
     // ( 0x0 .. 0x4000000 )
     if ( {address[RG:PAD0],{PAD0{1'b0}}} == 28'h0   ) begin
-            src_channel = 23'b010;
+            src_channel = 23'b001;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 14;
     end
 
@@ -204,7 +204,7 @@ module Computer_System_mm_interconnect_0_router_002
 
     // ( 0xa000000 .. 0xa000800 )
     if ( {address[RG:PAD2],{PAD2{1'b0}}} == 28'ha000000   ) begin
-            src_channel = 23'b001;
+            src_channel = 23'b010;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 10;
     end
 

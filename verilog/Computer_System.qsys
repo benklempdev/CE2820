@@ -1568,6 +1568,15 @@
  <connection
    kind="avalon"
    version="18.1"
+   start="video_pixel_buffer_dma_0.avalon_pixel_dma_master"
+   end="SDRAM.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
    start="Nios2.data_master"
    end="ADC.adc_slave">
   <parameter name="arbitrationPriority" value="1" />
