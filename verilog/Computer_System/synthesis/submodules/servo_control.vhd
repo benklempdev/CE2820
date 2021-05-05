@@ -14,7 +14,7 @@ end entity;
 architecture arch of servo_control is
 	constant ms_cycles: unsigned(8 downto 0) := "0" & x"c8";  --200
 	
-	constant prescaler: std_logic_vector(7 downto 0) := x"f4";  --250
+	constant prescaler: std_logic_vector(8 downto 0) := "1"&x"f4";  --250(fa) 500(1f4)
 	constant period: std_logic_vector(11 downto 0) := x"fa0";  --4000
 
 	signal irst, psc, clr, ltp: std_logic;
@@ -23,7 +23,7 @@ architecture arch of servo_control is
 	begin
 
 		--Prescaler (x250)
-		cpsc: entity work.prescaler generic map(n => 8)
+		cpsc: entity work.prescaler generic map(n => 9)
 		port map(en, irst, clk, prescaler, psc);
 
 		--Counter
