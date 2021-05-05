@@ -75,12 +75,13 @@ architecture arch of servo_control is
 		end process;
 		
 		--Only change value at period border
-		pipos: process(all)
-		begin
-			if clr = '1' then
-				ipos <= pos;
-			end if;
-		end process;
+--		pipos: process(all)
+--		begin
+--			if clr = '1' then
+--				ipos <= pos;
+--			end if;
+--		end process;
+		ipos <= pos;
 
 		pirst: process(all)
 		begin
