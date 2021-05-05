@@ -358,15 +358,9 @@ architecture rtl of Computer_System is
 
 	component blinky_test_port is
 		port (
-			clk       : in  std_logic                    := 'X';             -- clk
-			address   : in  std_logic                    := 'X';             -- address
-			bytenable : in  std_logic                    := 'X';             -- byteenable
-			write     : in  std_logic                    := 'X';             -- write
-			read      : in  std_logic                    := 'X';             -- read
-			writedata : in  std_logic_vector(7 downto 0) := (others => 'X'); -- writedata
-			readdata  : out std_logic_vector(7 downto 0);                    -- readdata
-			rst       : in  std_logic                    := 'X';             -- reset
-			blinky    : out std_logic                                        -- export
+			clk     : in  std_logic := 'X'; -- clk
+			reset   : in  std_logic := 'X'; -- reset
+			oblinky : out std_logic         -- export
 		);
 	end component blinky_test_port;
 
@@ -636,12 +630,6 @@ architecture rtl of Computer_System is
 			Arduino_Reset_N_s1_readdata                                    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			Arduino_Reset_N_s1_writedata                                   : out std_logic_vector(31 downto 0);                    -- writedata
 			Arduino_Reset_N_s1_chipselect                                  : out std_logic;                                        -- chipselect
-			blinky_test_0_avalon_slave_0_address                           : out std_logic_vector(0 downto 0);                     -- address
-			blinky_test_0_avalon_slave_0_write                             : out std_logic;                                        -- write
-			blinky_test_0_avalon_slave_0_read                              : out std_logic;                                        -- read
-			blinky_test_0_avalon_slave_0_readdata                          : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
-			blinky_test_0_avalon_slave_0_writedata                         : out std_logic_vector(7 downto 0);                     -- writedata
-			blinky_test_0_avalon_slave_0_byteenable                        : out std_logic_vector(0 downto 0);                     -- byteenable
 			Expansion_JP1_s1_address                                       : out std_logic_vector(1 downto 0);                     -- address
 			Expansion_JP1_s1_write                                         : out std_logic;                                        -- write
 			Expansion_JP1_s1_readdata                                      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -968,7 +956,7 @@ architecture rtl of Computer_System is
 	signal video_pixel_buffer_dma_0_avalon_pixel_source_startofpacket                 : std_logic;                     -- video_pixel_buffer_dma_0:stream_startofpacket -> video_lt24_controller_0:startofpacket
 	signal video_pixel_buffer_dma_0_avalon_pixel_source_endofpacket                   : std_logic;                     -- video_pixel_buffer_dma_0:stream_endofpacket -> video_lt24_controller_0:endofpacket
 	signal video_pll_0_lcd_clk_clk                                                    : std_logic;                     -- video_pll_0:lcd_clk_clk -> [mm_interconnect_0:video_pll_0_lcd_clk_clk, rst_controller_002:clk, video_lt24_controller_0:clk, video_pixel_buffer_dma_0:clk]
-	signal system_pll_sys_clk_clk                                                     : std_logic;                     -- System_PLL:sys_clk_clk -> [ADC:clock, Arduino_GPIO:clk, Arduino_Reset_N:clk, Expansion_JP1:clk, HEX3_HEX0:clk, HEX5_HEX4:clk, Interval_Timer:clk, Interval_Timer_2:clk, JTAG_UART:clk, JTAG_UART_2nd_Core:clk, JTAG_to_FPGA_Bridge:clk_clk, LEDs:clk, Nios2:clk, Onchip_SRAM:clk, Pushbuttons:clk, SDRAM:clk, Servo0:clk, Servo1:clk, Slider_Switches:clk, SysID:clock, blinky_test_0:clk, iServo0:clk, iServo1:clk, irq_mapper:clk, mm_interconnect_0:System_PLL_sys_clk_clk, rst_controller:clk, rst_controller_001:clk]
+	signal system_pll_sys_clk_clk                                                     : std_logic;                     -- System_PLL:sys_clk_clk -> [ADC:clock, Arduino_GPIO:clk, Arduino_Reset_N:clk, Expansion_JP1:clk, HEX3_HEX0:clk, HEX5_HEX4:clk, Interval_Timer:clk, Interval_Timer_2:clk, JTAG_UART:clk, JTAG_to_FPGA_Bridge:clk_clk, LEDs:clk, Nios2:clk, Onchip_SRAM:clk, Pushbuttons:clk, SDRAM:clk, Servo0:clk, Servo1:clk, Slider_Switches:clk, SysID:clock, blinky_test_0:clk, iServo0:clk, iServo1:clk, irq_mapper:clk, mm_interconnect_0:System_PLL_sys_clk_clk, rst_controller:clk, rst_controller_001:clk]
 	signal system_pll_reset_source_reset                                              : std_logic;                     -- System_PLL:reset_source_reset -> [JTAG_to_FPGA_Bridge:clk_reset_reset, rst_controller:reset_in0, rst_controller_001:reset_in1]
 	signal nios2_custom_instruction_master_readra                                     : std_logic;                     -- Nios2:D_ci_readra -> Nios2_custom_instruction_master_translator:ci_slave_readra
 	signal nios2_custom_instruction_master_a                                          : std_logic_vector(4 downto 0);  -- Nios2:D_ci_a -> Nios2_custom_instruction_master_translator:ci_slave_a
@@ -1085,12 +1073,6 @@ architecture rtl of Computer_System is
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read                         : std_logic;                     -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_read -> mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:in
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_write                        : std_logic;                     -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_write -> mm_interconnect_0_jtag_uart_avalon_jtag_slave_write:in
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata                    : std_logic_vector(31 downto 0); -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_writedata -> JTAG_UART:av_writedata
-	signal mm_interconnect_0_blinky_test_0_avalon_slave_0_readdata                    : std_logic_vector(7 downto 0);  -- blinky_test_0:readdata -> mm_interconnect_0:blinky_test_0_avalon_slave_0_readdata
-	signal mm_interconnect_0_blinky_test_0_avalon_slave_0_address                     : std_logic_vector(0 downto 0);  -- mm_interconnect_0:blinky_test_0_avalon_slave_0_address -> blinky_test_0:address
-	signal mm_interconnect_0_blinky_test_0_avalon_slave_0_read                        : std_logic;                     -- mm_interconnect_0:blinky_test_0_avalon_slave_0_read -> blinky_test_0:read
-	signal mm_interconnect_0_blinky_test_0_avalon_slave_0_byteenable                  : std_logic_vector(0 downto 0);  -- mm_interconnect_0:blinky_test_0_avalon_slave_0_byteenable -> blinky_test_0:bytenable
-	signal mm_interconnect_0_blinky_test_0_avalon_slave_0_write                       : std_logic;                     -- mm_interconnect_0:blinky_test_0_avalon_slave_0_write -> blinky_test_0:write
-	signal mm_interconnect_0_blinky_test_0_avalon_slave_0_writedata                   : std_logic_vector(7 downto 0);  -- mm_interconnect_0:blinky_test_0_avalon_slave_0_writedata -> blinky_test_0:writedata
 	signal mm_interconnect_0_sysid_control_slave_readdata                             : std_logic_vector(31 downto 0); -- SysID:readdata -> mm_interconnect_0:SysID_control_slave_readdata
 	signal mm_interconnect_0_sysid_control_slave_address                              : std_logic_vector(0 downto 0);  -- mm_interconnect_0:SysID_control_slave_address -> SysID:address
 	signal mm_interconnect_0_onchip_sram_s1_chipselect                                : std_logic;                     -- mm_interconnect_0:Onchip_SRAM_s1_chipselect -> Onchip_SRAM:chipselect
@@ -1191,7 +1173,7 @@ architecture rtl of Computer_System is
 	signal irq_mapper_receiver4_irq                                                   : std_logic;                     -- Interval_Timer:irq -> irq_mapper:receiver4_irq
 	signal irq_mapper_receiver5_irq                                                   : std_logic;                     -- Interval_Timer_2:irq -> irq_mapper:receiver5_irq
 	signal nios2_irq_irq                                                              : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> Nios2:irq
-	signal rst_controller_reset_out_reset                                             : std_logic;                     -- rst_controller:reset_out -> [ADC:reset, Onchip_SRAM:reset, Servo0:rst, Servo1:rst, blinky_test_0:rst, mm_interconnect_0:JTAG_to_FPGA_Bridge_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_0:SDRAM_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
+	signal rst_controller_reset_out_reset                                             : std_logic;                     -- rst_controller:reset_out -> [ADC:reset, Onchip_SRAM:reset, Servo0:rst, Servo1:rst, blinky_test_0:reset, mm_interconnect_0:JTAG_to_FPGA_Bridge_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_0:SDRAM_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                                         : std_logic;                     -- rst_controller:reset_req -> [Onchip_SRAM:reset_req, rst_translator:reset_req_in]
 	signal rst_controller_001_reset_out_reset                                         : std_logic;                     -- rst_controller_001:reset_out -> [irq_mapper:reset, mm_interconnect_0:Nios2_reset_reset_bridge_in_reset_reset, rst_controller_001_reset_out_reset:in]
 	signal nios2_debug_reset_request_reset                                            : std_logic;                     -- Nios2:debug_reset_request -> rst_controller_001:reset_in0
@@ -1213,7 +1195,7 @@ architecture rtl of Computer_System is
 	signal mm_interconnect_0_interval_timer_2_s1_write_ports_inv                      : std_logic;                     -- mm_interconnect_0_interval_timer_2_s1_write:inv -> Interval_Timer_2:write_n
 	signal mm_interconnect_0_iservo0_s1_write_ports_inv                               : std_logic;                     -- mm_interconnect_0_iservo0_s1_write:inv -> iServo0:write_n
 	signal mm_interconnect_0_iservo1_s1_write_ports_inv                               : std_logic;                     -- mm_interconnect_0_iservo1_s1_write:inv -> iServo1:write_n
-	signal rst_controller_reset_out_reset_ports_inv                                   : std_logic;                     -- rst_controller_reset_out_reset:inv -> [Arduino_GPIO:reset_n, Arduino_Reset_N:reset_n, Expansion_JP1:reset_n, HEX3_HEX0:reset_n, HEX5_HEX4:reset_n, Interval_Timer:reset_n, Interval_Timer_2:reset_n, JTAG_UART:rst_n, JTAG_UART_2nd_Core:rst_n, LEDs:reset_n, Pushbuttons:reset_n, SDRAM:reset_n, Slider_Switches:reset_n, SysID:reset_n, iServo0:reset_n, iServo1:reset_n]
+	signal rst_controller_reset_out_reset_ports_inv                                   : std_logic;                     -- rst_controller_reset_out_reset:inv -> [Arduino_GPIO:reset_n, Arduino_Reset_N:reset_n, Expansion_JP1:reset_n, HEX3_HEX0:reset_n, HEX5_HEX4:reset_n, Interval_Timer:reset_n, Interval_Timer_2:reset_n, JTAG_UART:rst_n, LEDs:reset_n, Pushbuttons:reset_n, SDRAM:reset_n, Slider_Switches:reset_n, SysID:reset_n, iServo0:reset_n, iServo1:reset_n]
 	signal rst_controller_001_reset_out_reset_ports_inv                               : std_logic;                     -- rst_controller_001_reset_out_reset:inv -> Nios2:reset_n
 
 begin
@@ -1340,20 +1322,6 @@ begin
 			av_writedata   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,       --                  .writedata
 			av_waitrequest => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest,     --                  .waitrequest
 			av_irq         => irq_mapper_receiver3_irq                                       --               irq.irq
-		);
-
-	jtag_uart_2nd_core : component Computer_System_JTAG_UART
-		port map (
-			clk            => system_pll_sys_clk_clk,                   --               clk.clk
-			rst_n          => rst_controller_reset_out_reset_ports_inv, --             reset.reset_n
-			av_chipselect  => open,                                     -- avalon_jtag_slave.chipselect
-			av_address     => open,                                     --                  .address
-			av_read_n      => open,                                     --                  .read_n
-			av_readdata    => open,                                     --                  .readdata
-			av_write_n     => open,                                     --                  .write_n
-			av_writedata   => open,                                     --                  .writedata
-			av_waitrequest => open,                                     --                  .waitrequest
-			av_irq         => open                                      --               irq.irq
 		);
 
 	jtag_to_fpga_bridge : component Computer_System_JTAG_to_FPGA_Bridge
@@ -1563,15 +1531,9 @@ begin
 
 	blinky_test_0 : component blinky_test_port
 		port map (
-			clk       => system_pll_sys_clk_clk,                                       --          clock.clk
-			address   => mm_interconnect_0_blinky_test_0_avalon_slave_0_address(0),    -- avalon_slave_0.address
-			bytenable => mm_interconnect_0_blinky_test_0_avalon_slave_0_byteenable(0), --               .byteenable
-			write     => mm_interconnect_0_blinky_test_0_avalon_slave_0_write,         --               .write
-			read      => mm_interconnect_0_blinky_test_0_avalon_slave_0_read,          --               .read
-			writedata => mm_interconnect_0_blinky_test_0_avalon_slave_0_writedata,     --               .writedata
-			readdata  => mm_interconnect_0_blinky_test_0_avalon_slave_0_readdata,      --               .readdata
-			rst       => rst_controller_reset_out_reset,                               --     reset_sink.reset
-			blinky    => blinky_export                                                 --    conduit_end.export
+			clk     => system_pll_sys_clk_clk,         --       clock.clk
+			reset   => rst_controller_reset_out_reset, --       reset.reset
+			oblinky => blinky_export                   -- conduit_end.export
 		);
 
 	iservo0 : component Computer_System_iServo0
@@ -1845,12 +1807,6 @@ begin
 			Arduino_Reset_N_s1_readdata                                    => mm_interconnect_0_arduino_reset_n_s1_readdata,                              --                                                     .readdata
 			Arduino_Reset_N_s1_writedata                                   => mm_interconnect_0_arduino_reset_n_s1_writedata,                             --                                                     .writedata
 			Arduino_Reset_N_s1_chipselect                                  => mm_interconnect_0_arduino_reset_n_s1_chipselect,                            --                                                     .chipselect
-			blinky_test_0_avalon_slave_0_address                           => mm_interconnect_0_blinky_test_0_avalon_slave_0_address,                     --                         blinky_test_0_avalon_slave_0.address
-			blinky_test_0_avalon_slave_0_write                             => mm_interconnect_0_blinky_test_0_avalon_slave_0_write,                       --                                                     .write
-			blinky_test_0_avalon_slave_0_read                              => mm_interconnect_0_blinky_test_0_avalon_slave_0_read,                        --                                                     .read
-			blinky_test_0_avalon_slave_0_readdata                          => mm_interconnect_0_blinky_test_0_avalon_slave_0_readdata,                    --                                                     .readdata
-			blinky_test_0_avalon_slave_0_writedata                         => mm_interconnect_0_blinky_test_0_avalon_slave_0_writedata,                   --                                                     .writedata
-			blinky_test_0_avalon_slave_0_byteenable                        => mm_interconnect_0_blinky_test_0_avalon_slave_0_byteenable,                  --                                                     .byteenable
 			Expansion_JP1_s1_address                                       => mm_interconnect_0_expansion_jp1_s1_address,                                 --                                     Expansion_JP1_s1.address
 			Expansion_JP1_s1_write                                         => mm_interconnect_0_expansion_jp1_s1_write,                                   --                                                     .write
 			Expansion_JP1_s1_readdata                                      => mm_interconnect_0_expansion_jp1_s1_readdata,                                --                                                     .readdata

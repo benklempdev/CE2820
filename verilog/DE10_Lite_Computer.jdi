@@ -1,11 +1,11 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="96936a1e7eecd3fd3c93"/>
+    <hash md5_digest_80b="ddf6a972d58484fa231f"/>
   </project>
   <file_info>
     <file device="10M50DAF484C7G" path="DE10_Lite_Computer.sof" usercode="0xFFFFFFFF"/>
   </file_info>
-  <hub_info hub_ir_width="6" ir_width="3" node_addr_width="3" node_count="4"/>
+  <hub_info hub_ir_width="5" ir_width="3" node_addr_width="2" node_count="3"/>
   <node_info>
     <node hpath="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart|alt_jtag_atlantic:Computer_System_JTAG_UART_alt_jtag_atlantic" instance_id="0" mfg_id="110" node_id="128" sld_node_info="0xC006E00" version="1">
       <parameters>
@@ -59,60 +59,6 @@
         <port name="t_pause"/>
         <port name="jtag.bp.u0_jtag_uart_Computer_System_JTAG_UART_alt_jtag_atlantic_tdo"/>
         <port name="jtag.bp.u0_jtag_uart_Computer_System_JTAG_UART_alt_jtag_atlantic_ir_out_0_"/>
-      </outputs>
-    </node>
-    <node hpath="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|alt_jtag_atlantic:Computer_System_JTAG_UART_alt_jtag_atlantic" instance_id="1" mfg_id="110" node_id="128" sld_node_info="0xC006E01" version="1">
-      <parameters>
-        <parameter name="INSTANCE_ID" type="dec" value="0"/>
-        <parameter name="SLD_NODE_INFO" type="ubin" value="00001100000000000110111000000000"/>
-        <parameter name="SLD_AUTO_INSTANCE_INDEX" type="string" value="YES"/>
-        <parameter name="LOG2_TXFIFO_DEPTH" type="dec" value="6"/>
-        <parameter name="LOG2_RXFIFO_DEPTH" type="dec" value="6"/>
-        <parameter name="RESERVED" type="dec" value="0"/>
-        <parameter name="DATA_WIDTH" type="dec" value="8"/>
-        <parameter name="SCAN_LENGTH" type="dec" value="11"/>
-      </parameters>
-      <inputs>
-        <port name="clk" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|clk"/>
-        <port name="rst_n" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|rst_n"/>
-        <port name="r_val" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|r_val"/>
-        <port name="r_dat[0]" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|Computer_System_JTAG_UART_scfifo_w:the_Computer_System_JTAG_UART_scfifo_w|r_dat[0]"/>
-        <port name="r_dat[1]" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|Computer_System_JTAG_UART_scfifo_w:the_Computer_System_JTAG_UART_scfifo_w|r_dat[1]"/>
-        <port name="r_dat[2]" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|Computer_System_JTAG_UART_scfifo_w:the_Computer_System_JTAG_UART_scfifo_w|r_dat[2]"/>
-        <port name="r_dat[3]" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|Computer_System_JTAG_UART_scfifo_w:the_Computer_System_JTAG_UART_scfifo_w|r_dat[3]"/>
-        <port name="r_dat[4]" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|Computer_System_JTAG_UART_scfifo_w:the_Computer_System_JTAG_UART_scfifo_w|r_dat[4]"/>
-        <port name="r_dat[5]" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|Computer_System_JTAG_UART_scfifo_w:the_Computer_System_JTAG_UART_scfifo_w|r_dat[5]"/>
-        <port name="r_dat[6]" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|Computer_System_JTAG_UART_scfifo_w:the_Computer_System_JTAG_UART_scfifo_w|r_dat[6]"/>
-        <port name="r_dat[7]" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|Computer_System_JTAG_UART_scfifo_w:the_Computer_System_JTAG_UART_scfifo_w|r_dat[7]"/>
-        <port name="t_dav" source="Computer_System:u0|Computer_System_JTAG_UART:jtag_uart_2nd_core|t_dav"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_raw_tck" source="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_raw_tck"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_tdi" source="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_tdi"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_jtag_state_rti" source="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_jtag_state_rti"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_usr1" source="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_usr1"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_clr" source="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_clr"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_ena" source="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_ena"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_ir_in_0_" source="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_ir_in_0_"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_jtag_state_cdr" source="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_jtag_state_cdr"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_jtag_state_sdr" source="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_jtag_state_sdr"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_jtag_state_udr" source="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_jtag_state_udr"/>
-      </inputs>
-      <outputs>
-        <port name="r_ena"/>
-        <port name="r_ena"/>
-        <port name="t_ena"/>
-        <port name="t_ena"/>
-        <port name="t_dat[0]"/>
-        <port name="t_dat[1]"/>
-        <port name="t_dat[2]"/>
-        <port name="t_dat[3]"/>
-        <port name="t_dat[4]"/>
-        <port name="t_dat[5]"/>
-        <port name="t_dat[6]"/>
-        <port name="t_dat[7]"/>
-        <port name="t_pause"/>
-        <port name="t_pause"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_tdo"/>
-        <port name="jtag.bp.u0_jtag_uart_2nd_core_Computer_System_JTAG_UART_alt_jtag_atlantic_ir_out_0_"/>
       </outputs>
     </node>
     <node hpath="Computer_System:u0|Computer_System_JTAG_to_FPGA_Bridge:jtag_to_fpga_bridge|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_sld_node:node|sld_virtual_jtag_basic:sld_virtual_jtag_component|sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst" instance_id="0" mfg_id="110" node_id="132" sld_node_info="0xC206E00" version="1">
@@ -271,7 +217,7 @@
   <sld_infos>
     <sld_info hpath="Computer_System:u0" name="u0">
       <assignment_values>
-        <assignment_value text="QSYS_NAME Computer_System HAS_SOPCINFO 1 GENERATION_ID 1620062004"/>
+        <assignment_value text="QSYS_NAME Computer_System HAS_SOPCINFO 1 GENERATION_ID 1620146908"/>
       </assignment_values>
       <parameters/>
     </sld_info>
