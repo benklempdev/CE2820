@@ -6,8 +6,6 @@ module Computer_System (
 	expansion_jp1_export,
 	hex3_hex0_export,
 	hex5_hex4_export,
-	iservo_input_0_export,
-	iservo_input_1_export,
 	leds_export,
 	pushbuttons_export,
 	sdram_addr,
@@ -41,8 +39,6 @@ module Computer_System (
 	inout	[31:0]	expansion_jp1_export;
 	output	[31:0]	hex3_hex0_export;
 	output	[31:0]	hex5_hex4_export;
-	output	[15:0]	iservo_input_0_export;
-	output	[15:0]	iservo_input_1_export;
 	output	[9:0]	leds_export;
 	input	[1:0]	pushbuttons_export;
 	output	[12:0]	sdram_addr;

@@ -5,8 +5,6 @@
 		.expansion_jp1_export            (<connected-to-expansion_jp1_export>),            //           expansion_jp1.export
 		.hex3_hex0_export                (<connected-to-hex3_hex0_export>),                //               hex3_hex0.export
 		.hex5_hex4_export                (<connected-to-hex5_hex4_export>),                //               hex5_hex4.export
-		.iservo_input_0_export           (<connected-to-iservo_input_0_export>),           //          iservo_input_0.export
-		.iservo_input_1_export           (<connected-to-iservo_input_1_export>),           //          iservo_input_1.export
 		.leds_export                     (<connected-to-leds_export>),                     //                    leds.export
 		.pushbuttons_export              (<connected-to-pushbuttons_export>),              //             pushbuttons.export
 		.sdram_addr                      (<connected-to-sdram_addr>),                      //                   sdram.addr

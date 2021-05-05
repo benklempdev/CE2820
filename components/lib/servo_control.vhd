@@ -17,30 +17,29 @@ architecture arch of servo_control is
 	constant prescaler: std_logic_vector(7 downto 0) := x"f4";  --250
 	constant period: std_logic_vector(11 downto 0) := x"fa0";  --4000
 
-	signal psc, clr, ltp: std_logic;
+	signal irst, psc, clr, ltp: std_logic;
 	signal count: std_logic_vector(11 downto 0);
-	signal cpos: std_logic_vector(7 downto 0);
 	signal pulse: unsigned(8 downto 0);
 	begin
 
 		--Prescaler (x250)
 		cpsc: entity work.prescaler generic map(n => 8)
-		port map(en, rst, clk, prescaler, psc);
+		port map(en, irst, clk, prescaler, psc);
 
 		--Counter
 		ccnt: entity work.counter generic map(n => 12)
-		port map('1', en, '0', clr or rst, psc, x"000", count);
+		port map('1', en, '0', clr or irst, psc, x"000", count);
 		
 		--Pulse width
-		pulse <= unsigned("0"&cpos) + ms_cycles;
+		pulse <= unsigned("0"&pos) + ms_cycles;
 
 		--Control signal
 		ltp <= '1' when count < std_logic_vector("000" & pulse) else '0';
-		control <= ltp and not rst and en;
+		control <= ltp and not irst and en;
 
 		--Period clear signal
 		clr <= '1' when count >= period else '0';
 		
-		--Clamped position signal
-		cpos <= x"c8" when (pos > x"c8") else pos;
+		--Reset on pos > 200
+		irst <= '1' when (pos > x"c8") else rst;
 end architecture;

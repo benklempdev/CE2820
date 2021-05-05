@@ -46,9 +46,7 @@ architecture arch of prescaler is
 		begin
 			if count = std_logic_vector(uscaler - 1) then
 				clr <= '1';
-			elsif urst = '1' then
-				clr <= '0';
-			elsif wave = '1' then
+			elsif urst = '1' or wave = '1' then
 				clr <= '0';
 			end if;
 		end process;

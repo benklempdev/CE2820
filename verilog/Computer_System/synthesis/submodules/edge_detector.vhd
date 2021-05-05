@@ -10,17 +10,25 @@ entity edge_detector is
 end entity;
 
 architecture arch of edge_detector is
-	signal last: std_logic;
+	signal sr, sf: std_logic;
 	begin
-		pedge: process(all)
+		psr: process(sig)
 		begin
-			last <= sig;
 			if rst = '1' then
-				edge <= '0';
-			elsif en = '1' then
-				if sig xor last then
-					edge <= '1';
-				end if;
+				sr <= '0';
+			elsif rising_edge(sig) then
+				sr <= en;
 			end if;
 		end process;
+
+		psf: process(sig)
+		begin
+			if rst = '1' then
+				sf <= '0';
+			elsif falling_edge(sig) then
+				sf <= en;
+			end if;
+		end process;
+
+		edge <= sr or sf;
 end architecture;

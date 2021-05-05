@@ -6,8 +6,6 @@
 			expansion_jp1_export            : inout std_logic_vector(31 downto 0) := (others => 'X'); -- export
 			hex3_hex0_export                : out   std_logic_vector(31 downto 0);                    -- export
 			hex5_hex4_export                : out   std_logic_vector(31 downto 0);                    -- export
-			iservo_input_0_export           : out   std_logic_vector(15 downto 0);                    -- export
-			iservo_input_1_export           : out   std_logic_vector(15 downto 0);                    -- export
 			leds_export                     : out   std_logic_vector(9 downto 0);                     -- export
 			pushbuttons_export              : in    std_logic_vector(1 downto 0)  := (others => 'X'); -- export
 			sdram_addr                      : out   std_logic_vector(12 downto 0);                    -- addr
@@ -45,8 +43,6 @@
 			expansion_jp1_export            => CONNECTED_TO_expansion_jp1_export,            --           expansion_jp1.export
 			hex3_hex0_export                => CONNECTED_TO_hex3_hex0_export,                --               hex3_hex0.export
 			hex5_hex4_export                => CONNECTED_TO_hex5_hex4_export,                --               hex5_hex4.export
-			iservo_input_0_export           => CONNECTED_TO_iservo_input_0_export,           --          iservo_input_0.export
-			iservo_input_1_export           => CONNECTED_TO_iservo_input_1_export,           --          iservo_input_1.export
 			leds_export                     => CONNECTED_TO_leds_export,                     --                    leds.export
 			pushbuttons_export              => CONNECTED_TO_pushbuttons_export,              --             pushbuttons.export
 			sdram_addr                      => CONNECTED_TO_sdram_addr,                      --                   sdram.addr
