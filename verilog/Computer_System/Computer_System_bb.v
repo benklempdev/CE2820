@@ -7,6 +7,12 @@ module Computer_System (
 	hex3_hex0_export,
 	hex5_hex4_export,
 	leds_export,
+	lt24_touch_dout,
+	lt24_touch_penirq_n,
+	lt24_touch_busy,
+	lt24_touch_din,
+	lt24_touch_dclk,
+	lt24_touch_cs,
 	pushbuttons_export,
 	sdram_addr,
 	sdram_ba,
@@ -40,6 +46,12 @@ module Computer_System (
 	output	[31:0]	hex3_hex0_export;
 	output	[31:0]	hex5_hex4_export;
 	output	[9:0]	leds_export;
+	input		lt24_touch_dout;
+	input		lt24_touch_penirq_n;
+	input		lt24_touch_busy;
+	output		lt24_touch_din;
+	output		lt24_touch_dclk;
+	output		lt24_touch_cs;
 	input	[1:0]	pushbuttons_export;
 	output	[12:0]	sdram_addr;
 	output	[1:0]	sdram_ba;

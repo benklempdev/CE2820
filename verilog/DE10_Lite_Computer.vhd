@@ -74,6 +74,14 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 		sdram_ras_n                : out   std_logic;                                        -- ras_n
 		sdram_we_n                 : out   std_logic;                                        -- we_n
 		sdram_clk_clk              : out   std_logic;                                        -- clk
+		
+		lt24_touch_dout				: in    std_logic;
+		lt24_touch_penirq_n			: in    std_logic;
+		lt24_touch_busy				: in    std_logic;
+		lt24_touch_din					: out   std_logic;
+		lt24_touch_dclk				: out   std_logic;
+		lt24_touch_cs					: out   std_logic;
+		
 		slider_switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
 		servo_control_0_export	   : out   std_logic;
 		servo_control_1_export	   : out   std_logic;
@@ -116,6 +124,8 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 	 signal arduino_io_signal: std_logic_vector(15 downto 0);
 
     signal lt24_data: std_logic_vector(15 downto 0);
+	 
+	 signal dout, busy, penirq_n: std_logic;
 
 
 begin 
@@ -145,6 +155,13 @@ begin
             hex5_hex4_export           => hex5_hex4,           --            hex5_hex4.export
  
 				leds_export                => LEDR,                --                 leds.export
+				
+				lt24_touch_dout				=> dout,
+				lt24_touch_penirq_n			=> penirq_n,
+				lt24_touch_busy				=> busy,
+				lt24_touch_din					=> GPIO(3),
+				lt24_touch_dclk				=> GPIO(4),
+				lt24_touch_cs					=> GPIO(27),
 				
 				servo_control_0_export	=> servo_control_0,
 				servo_control_1_export  => servo_control_1,
@@ -178,6 +195,10 @@ begin
             sdram_clk_clk              => DRAM_CLK              --            sdram_clk.clk
                         
         );
+		  
+	dout <= GPIO(1);
+	penirq_n <= GPIO(0);
+	busy <= GPIO(2);
 
 	chex0: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(7 downto 0), hex3_hex0_out(7 downto 0));
 	chex1: entity work.periph_7seg port map(hex5_hex4(16), hex3_hex0(15 downto 8), hex3_hex0_out(15 downto 8));

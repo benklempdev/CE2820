@@ -6,6 +6,12 @@
 		.hex3_hex0_export                (<connected-to-hex3_hex0_export>),                //               hex3_hex0.export
 		.hex5_hex4_export                (<connected-to-hex5_hex4_export>),                //               hex5_hex4.export
 		.leds_export                     (<connected-to-leds_export>),                     //                    leds.export
+		.lt24_touch_dout                 (<connected-to-lt24_touch_dout>),                 //              lt24_touch.dout
+		.lt24_touch_penirq_n             (<connected-to-lt24_touch_penirq_n>),             //                        .penirq_n
+		.lt24_touch_busy                 (<connected-to-lt24_touch_busy>),                 //                        .busy
+		.lt24_touch_din                  (<connected-to-lt24_touch_din>),                  //                        .din
+		.lt24_touch_dclk                 (<connected-to-lt24_touch_dclk>),                 //                        .dclk
+		.lt24_touch_cs                   (<connected-to-lt24_touch_cs>),                   //                        .cs
 		.pushbuttons_export              (<connected-to-pushbuttons_export>),              //             pushbuttons.export
 		.sdram_addr                      (<connected-to-sdram_addr>),                      //                   sdram.addr
 		.sdram_ba                        (<connected-to-sdram_ba>),                        //                        .ba

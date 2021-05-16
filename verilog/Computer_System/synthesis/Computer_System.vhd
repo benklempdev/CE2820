@@ -15,6 +15,12 @@ entity Computer_System is
 		hex3_hex0_export                : out   std_logic_vector(31 downto 0);                    --               hex3_hex0.export
 		hex5_hex4_export                : out   std_logic_vector(31 downto 0);                    --               hex5_hex4.export
 		leds_export                     : out   std_logic_vector(9 downto 0);                     --                    leds.export
+		lt24_touch_dout                 : in    std_logic                     := '0';             --              lt24_touch.dout
+		lt24_touch_penirq_n             : in    std_logic                     := '0';             --                        .penirq_n
+		lt24_touch_busy                 : in    std_logic                     := '0';             --                        .busy
+		lt24_touch_din                  : out   std_logic;                                        --                        .din
+		lt24_touch_dclk                 : out   std_logic;                                        --                        .dclk
+		lt24_touch_cs                   : out   std_logic;                                        --                        .cs
 		pushbuttons_export              : in    std_logic_vector(1 downto 0)  := (others => '0'); --             pushbuttons.export
 		sdram_addr                      : out   std_logic_vector(12 downto 0);                    --                   sdram.addr
 		sdram_ba                        : out   std_logic_vector(1 downto 0);                     --                        .ba
@@ -362,6 +368,26 @@ architecture rtl of Computer_System is
 		);
 	end component blinky_test_port;
 
+	component lt24_touch_port is
+		port (
+			clk          : in  std_logic                     := 'X';             -- clk
+			address      : in  std_logic                     := 'X';             -- address
+			byteenable   : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
+			write        : in  std_logic                     := 'X';             -- write
+			read         : in  std_logic                     := 'X';             -- read
+			writedata    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			readdata     : out std_logic_vector(31 downto 0);                    -- readdata
+			rst          : in  std_logic                     := 'X';             -- reset
+			adc_dout     : in  std_logic                     := 'X';             -- dout
+			adc_penirq_n : in  std_logic                     := 'X';             -- penirq_n
+			adc_busy     : in  std_logic                     := 'X';             -- busy
+			adc_din      : out std_logic;                                        -- din
+			adc_dclk     : out std_logic;                                        -- dclk
+			adc_cs       : out std_logic;                                        -- cs
+			irq          : out std_logic                                         -- irq
+		);
+	end component lt24_touch_port;
+
 	component Computer_System_video_lt24_controller_0 is
 		port (
 			clk           : in  std_logic                     := 'X';             -- clk
@@ -652,6 +678,12 @@ architecture rtl of Computer_System is
 			LEDs_s1_readdata                                               : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			LEDs_s1_writedata                                              : out std_logic_vector(31 downto 0);                    -- writedata
 			LEDs_s1_chipselect                                             : out std_logic;                                        -- chipselect
+			lt24_touch_0_avalon_slave_0_address                            : out std_logic_vector(0 downto 0);                     -- address
+			lt24_touch_0_avalon_slave_0_write                              : out std_logic;                                        -- write
+			lt24_touch_0_avalon_slave_0_read                               : out std_logic;                                        -- read
+			lt24_touch_0_avalon_slave_0_readdata                           : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			lt24_touch_0_avalon_slave_0_writedata                          : out std_logic_vector(31 downto 0);                    -- writedata
+			lt24_touch_0_avalon_slave_0_byteenable                         : out std_logic_vector(3 downto 0);                     -- byteenable
 			Nios2_debug_mem_slave_address                                  : out std_logic_vector(8 downto 0);                     -- address
 			Nios2_debug_mem_slave_write                                    : out std_logic;                                        -- write
 			Nios2_debug_mem_slave_read                                     : out std_logic;                                        -- read
@@ -723,6 +755,7 @@ architecture rtl of Computer_System is
 			receiver3_irq : in  std_logic                     := 'X'; -- irq
 			receiver4_irq : in  std_logic                     := 'X'; -- irq
 			receiver5_irq : in  std_logic                     := 'X'; -- irq
+			receiver6_irq : in  std_logic                     := 'X'; -- irq
 			sender_irq    : out std_logic_vector(31 downto 0)         -- irq
 		);
 	end component Computer_System_irq_mapper;
@@ -931,7 +964,7 @@ architecture rtl of Computer_System is
 	signal video_pixel_buffer_dma_0_avalon_pixel_source_startofpacket                 : std_logic;                     -- video_pixel_buffer_dma_0:stream_startofpacket -> video_lt24_controller_0:startofpacket
 	signal video_pixel_buffer_dma_0_avalon_pixel_source_endofpacket                   : std_logic;                     -- video_pixel_buffer_dma_0:stream_endofpacket -> video_lt24_controller_0:endofpacket
 	signal video_pll_0_lcd_clk_clk                                                    : std_logic;                     -- video_pll_0:lcd_clk_clk -> [mm_interconnect_0:video_pll_0_lcd_clk_clk, rst_controller_002:clk, video_lt24_controller_0:clk, video_pixel_buffer_dma_0:clk]
-	signal system_pll_sys_clk_clk                                                     : std_logic;                     -- System_PLL:sys_clk_clk -> [ADC:clock, Arduino_GPIO:clk, Arduino_Reset_N:clk, Expansion_JP1:clk, HEX3_HEX0:clk, HEX5_HEX4:clk, Interval_Timer:clk, Interval_Timer_2:clk, JTAG_UART:clk, JTAG_to_FPGA_Bridge:clk_clk, LEDs:clk, Nios2:clk, Onchip_SRAM:clk, Pushbuttons:clk, SDRAM:clk, Servo0:clk, Servo1:clk, Slider_Switches:clk, SysID:clock, blinky_test_0:clk, irq_mapper:clk, mm_interconnect_0:System_PLL_sys_clk_clk, rst_controller:clk, rst_controller_001:clk]
+	signal system_pll_sys_clk_clk                                                     : std_logic;                     -- System_PLL:sys_clk_clk -> [ADC:clock, Arduino_GPIO:clk, Arduino_Reset_N:clk, Expansion_JP1:clk, HEX3_HEX0:clk, HEX5_HEX4:clk, Interval_Timer:clk, Interval_Timer_2:clk, JTAG_UART:clk, JTAG_to_FPGA_Bridge:clk_clk, LEDs:clk, Nios2:clk, Onchip_SRAM:clk, Pushbuttons:clk, SDRAM:clk, Servo0:clk, Servo1:clk, Slider_Switches:clk, SysID:clock, blinky_test_0:clk, irq_mapper:clk, lt24_touch_0:clk, mm_interconnect_0:System_PLL_sys_clk_clk, rst_controller:clk, rst_controller_001:clk]
 	signal system_pll_reset_source_reset                                              : std_logic;                     -- System_PLL:reset_source_reset -> [JTAG_to_FPGA_Bridge:clk_reset_reset, rst_controller:reset_in0, rst_controller_001:reset_in1]
 	signal nios2_custom_instruction_master_readra                                     : std_logic;                     -- Nios2:D_ci_readra -> Nios2_custom_instruction_master_translator:ci_slave_readra
 	signal nios2_custom_instruction_master_a                                          : std_logic_vector(4 downto 0);  -- Nios2:D_ci_a -> Nios2_custom_instruction_master_translator:ci_slave_a
@@ -1048,6 +1081,12 @@ architecture rtl of Computer_System is
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read                         : std_logic;                     -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_read -> mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:in
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_write                        : std_logic;                     -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_write -> mm_interconnect_0_jtag_uart_avalon_jtag_slave_write:in
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata                    : std_logic_vector(31 downto 0); -- mm_interconnect_0:JTAG_UART_avalon_jtag_slave_writedata -> JTAG_UART:av_writedata
+	signal mm_interconnect_0_lt24_touch_0_avalon_slave_0_readdata                     : std_logic_vector(31 downto 0); -- lt24_touch_0:readdata -> mm_interconnect_0:lt24_touch_0_avalon_slave_0_readdata
+	signal mm_interconnect_0_lt24_touch_0_avalon_slave_0_address                      : std_logic_vector(0 downto 0);  -- mm_interconnect_0:lt24_touch_0_avalon_slave_0_address -> lt24_touch_0:address
+	signal mm_interconnect_0_lt24_touch_0_avalon_slave_0_read                         : std_logic;                     -- mm_interconnect_0:lt24_touch_0_avalon_slave_0_read -> lt24_touch_0:read
+	signal mm_interconnect_0_lt24_touch_0_avalon_slave_0_byteenable                   : std_logic_vector(3 downto 0);  -- mm_interconnect_0:lt24_touch_0_avalon_slave_0_byteenable -> lt24_touch_0:byteenable
+	signal mm_interconnect_0_lt24_touch_0_avalon_slave_0_write                        : std_logic;                     -- mm_interconnect_0:lt24_touch_0_avalon_slave_0_write -> lt24_touch_0:write
+	signal mm_interconnect_0_lt24_touch_0_avalon_slave_0_writedata                    : std_logic_vector(31 downto 0); -- mm_interconnect_0:lt24_touch_0_avalon_slave_0_writedata -> lt24_touch_0:writedata
 	signal mm_interconnect_0_sysid_control_slave_readdata                             : std_logic_vector(31 downto 0); -- SysID:readdata -> mm_interconnect_0:SysID_control_slave_readdata
 	signal mm_interconnect_0_sysid_control_slave_address                              : std_logic_vector(0 downto 0);  -- mm_interconnect_0:SysID_control_slave_address -> SysID:address
 	signal mm_interconnect_0_onchip_sram_s1_chipselect                                : std_logic;                     -- mm_interconnect_0:Onchip_SRAM_s1_chipselect -> Onchip_SRAM:chipselect
@@ -1131,14 +1170,15 @@ architecture rtl of Computer_System is
 	signal mm_interconnect_0_onchip_sram_s2_write                                     : std_logic;                     -- mm_interconnect_0:Onchip_SRAM_s2_write -> Onchip_SRAM:write2
 	signal mm_interconnect_0_onchip_sram_s2_writedata                                 : std_logic_vector(31 downto 0); -- mm_interconnect_0:Onchip_SRAM_s2_writedata -> Onchip_SRAM:writedata2
 	signal mm_interconnect_0_onchip_sram_s2_clken                                     : std_logic;                     -- mm_interconnect_0:Onchip_SRAM_s2_clken -> Onchip_SRAM:clken2
-	signal irq_mapper_receiver0_irq                                                   : std_logic;                     -- Pushbuttons:irq -> irq_mapper:receiver0_irq
-	signal irq_mapper_receiver1_irq                                                   : std_logic;                     -- Expansion_JP1:irq -> irq_mapper:receiver1_irq
-	signal irq_mapper_receiver2_irq                                                   : std_logic;                     -- Arduino_GPIO:irq -> irq_mapper:receiver2_irq
-	signal irq_mapper_receiver3_irq                                                   : std_logic;                     -- JTAG_UART:av_irq -> irq_mapper:receiver3_irq
-	signal irq_mapper_receiver4_irq                                                   : std_logic;                     -- Interval_Timer:irq -> irq_mapper:receiver4_irq
-	signal irq_mapper_receiver5_irq                                                   : std_logic;                     -- Interval_Timer_2:irq -> irq_mapper:receiver5_irq
+	signal irq_mapper_receiver0_irq                                                   : std_logic;                     -- lt24_touch_0:irq -> irq_mapper:receiver0_irq
+	signal irq_mapper_receiver1_irq                                                   : std_logic;                     -- Pushbuttons:irq -> irq_mapper:receiver1_irq
+	signal irq_mapper_receiver2_irq                                                   : std_logic;                     -- Expansion_JP1:irq -> irq_mapper:receiver2_irq
+	signal irq_mapper_receiver3_irq                                                   : std_logic;                     -- Arduino_GPIO:irq -> irq_mapper:receiver3_irq
+	signal irq_mapper_receiver4_irq                                                   : std_logic;                     -- JTAG_UART:av_irq -> irq_mapper:receiver4_irq
+	signal irq_mapper_receiver5_irq                                                   : std_logic;                     -- Interval_Timer:irq -> irq_mapper:receiver5_irq
+	signal irq_mapper_receiver6_irq                                                   : std_logic;                     -- Interval_Timer_2:irq -> irq_mapper:receiver6_irq
 	signal nios2_irq_irq                                                              : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> Nios2:irq
-	signal rst_controller_reset_out_reset                                             : std_logic;                     -- rst_controller:reset_out -> [ADC:reset, Onchip_SRAM:reset, Servo0:rst, Servo1:rst, blinky_test_0:reset, mm_interconnect_0:JTAG_to_FPGA_Bridge_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_0:SDRAM_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
+	signal rst_controller_reset_out_reset                                             : std_logic;                     -- rst_controller:reset_out -> [ADC:reset, Onchip_SRAM:reset, Servo0:rst, Servo1:rst, blinky_test_0:reset, lt24_touch_0:rst, mm_interconnect_0:JTAG_to_FPGA_Bridge_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_0:SDRAM_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                                         : std_logic;                     -- rst_controller:reset_req -> [Onchip_SRAM:reset_req, rst_translator:reset_req_in]
 	signal rst_controller_001_reset_out_reset                                         : std_logic;                     -- rst_controller_001:reset_out -> [irq_mapper:reset, mm_interconnect_0:Nios2_reset_reset_bridge_in_reset_reset, rst_controller_001_reset_out_reset:in]
 	signal nios2_debug_reset_request_reset                                            : std_logic;                     -- Nios2:debug_reset_request -> rst_controller_001:reset_in0
@@ -1197,7 +1237,7 @@ begin
 			chipselect => mm_interconnect_0_arduino_gpio_s1_chipselect,      --                    .chipselect
 			readdata   => mm_interconnect_0_arduino_gpio_s1_readdata,        --                    .readdata
 			bidir_port => arduino_gpio_export,                               -- external_connection.export
-			irq        => irq_mapper_receiver2_irq                           --                 irq.irq
+			irq        => irq_mapper_receiver3_irq                           --                 irq.irq
 		);
 
 	arduino_reset_n : component Computer_System_Arduino_Reset_N
@@ -1222,7 +1262,7 @@ begin
 			chipselect => mm_interconnect_0_expansion_jp1_s1_chipselect,      --                    .chipselect
 			readdata   => mm_interconnect_0_expansion_jp1_s1_readdata,        --                    .readdata
 			bidir_port => expansion_jp1_export,                               -- external_connection.export
-			irq        => irq_mapper_receiver1_irq                            --                 irq.irq
+			irq        => irq_mapper_receiver2_irq                            --                 irq.irq
 		);
 
 	hex3_hex0 : component Computer_System_HEX3_HEX0
@@ -1258,7 +1298,7 @@ begin
 			readdata   => mm_interconnect_0_interval_timer_s1_readdata,        --      .readdata
 			chipselect => mm_interconnect_0_interval_timer_s1_chipselect,      --      .chipselect
 			write_n    => mm_interconnect_0_interval_timer_s1_write_ports_inv, --      .write_n
-			irq        => irq_mapper_receiver4_irq                             --   irq.irq
+			irq        => irq_mapper_receiver5_irq                             --   irq.irq
 		);
 
 	interval_timer_2 : component Computer_System_Interval_Timer
@@ -1270,7 +1310,7 @@ begin
 			readdata   => mm_interconnect_0_interval_timer_2_s1_readdata,        --      .readdata
 			chipselect => mm_interconnect_0_interval_timer_2_s1_chipselect,      --      .chipselect
 			write_n    => mm_interconnect_0_interval_timer_2_s1_write_ports_inv, --      .write_n
-			irq        => irq_mapper_receiver5_irq                               --   irq.irq
+			irq        => irq_mapper_receiver6_irq                               --   irq.irq
 		);
 
 	jtag_uart : component Computer_System_JTAG_UART
@@ -1284,7 +1324,7 @@ begin
 			av_write_n     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv, --                  .write_n
 			av_writedata   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,       --                  .writedata
 			av_waitrequest => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest,     --                  .waitrequest
-			av_irq         => irq_mapper_receiver3_irq                                       --               irq.irq
+			av_irq         => irq_mapper_receiver4_irq                                       --               irq.irq
 		);
 
 	jtag_to_fpga_bridge : component Computer_System_JTAG_to_FPGA_Bridge
@@ -1413,7 +1453,7 @@ begin
 			chipselect => mm_interconnect_0_pushbuttons_s1_chipselect,      --                    .chipselect
 			readdata   => mm_interconnect_0_pushbuttons_s1_readdata,        --                    .readdata
 			in_port    => pushbuttons_export,                               -- external_connection.export
-			irq        => irq_mapper_receiver0_irq                          --                 irq.irq
+			irq        => irq_mapper_receiver1_irq                          --                 irq.irq
 		);
 
 	sdram : component Computer_System_SDRAM
@@ -1497,6 +1537,25 @@ begin
 			clk     => system_pll_sys_clk_clk,         --       clock.clk
 			reset   => rst_controller_reset_out_reset, --       reset.reset
 			oblinky => blinky_export                   -- conduit_end.export
+		);
+
+	lt24_touch_0 : component lt24_touch_port
+		port map (
+			clk          => system_pll_sys_clk_clk,                                   --            clock.clk
+			address      => mm_interconnect_0_lt24_touch_0_avalon_slave_0_address(0), --   avalon_slave_0.address
+			byteenable   => mm_interconnect_0_lt24_touch_0_avalon_slave_0_byteenable, --                 .byteenable
+			write        => mm_interconnect_0_lt24_touch_0_avalon_slave_0_write,      --                 .write
+			read         => mm_interconnect_0_lt24_touch_0_avalon_slave_0_read,       --                 .read
+			writedata    => mm_interconnect_0_lt24_touch_0_avalon_slave_0_writedata,  --                 .writedata
+			readdata     => mm_interconnect_0_lt24_touch_0_avalon_slave_0_readdata,   --                 .readdata
+			rst          => rst_controller_reset_out_reset,                           --            reset.reset
+			adc_dout     => lt24_touch_dout,                                          --      conduit_end.dout
+			adc_penirq_n => lt24_touch_penirq_n,                                      --                 .penirq_n
+			adc_busy     => lt24_touch_busy,                                          --                 .busy
+			adc_din      => lt24_touch_din,                                           --                 .din
+			adc_dclk     => lt24_touch_dclk,                                          --                 .dclk
+			adc_cs       => lt24_touch_cs,                                            --                 .cs
+			irq          => irq_mapper_receiver0_irq                                  -- interrupt_sender.irq
 		);
 
 	video_lt24_controller_0 : component Computer_System_video_lt24_controller_0
@@ -1783,6 +1842,12 @@ begin
 			LEDs_s1_readdata                                               => mm_interconnect_0_leds_s1_readdata,                                         --                                                     .readdata
 			LEDs_s1_writedata                                              => mm_interconnect_0_leds_s1_writedata,                                        --                                                     .writedata
 			LEDs_s1_chipselect                                             => mm_interconnect_0_leds_s1_chipselect,                                       --                                                     .chipselect
+			lt24_touch_0_avalon_slave_0_address                            => mm_interconnect_0_lt24_touch_0_avalon_slave_0_address,                      --                          lt24_touch_0_avalon_slave_0.address
+			lt24_touch_0_avalon_slave_0_write                              => mm_interconnect_0_lt24_touch_0_avalon_slave_0_write,                        --                                                     .write
+			lt24_touch_0_avalon_slave_0_read                               => mm_interconnect_0_lt24_touch_0_avalon_slave_0_read,                         --                                                     .read
+			lt24_touch_0_avalon_slave_0_readdata                           => mm_interconnect_0_lt24_touch_0_avalon_slave_0_readdata,                     --                                                     .readdata
+			lt24_touch_0_avalon_slave_0_writedata                          => mm_interconnect_0_lt24_touch_0_avalon_slave_0_writedata,                    --                                                     .writedata
+			lt24_touch_0_avalon_slave_0_byteenable                         => mm_interconnect_0_lt24_touch_0_avalon_slave_0_byteenable,                   --                                                     .byteenable
 			Nios2_debug_mem_slave_address                                  => mm_interconnect_0_nios2_debug_mem_slave_address,                            --                                Nios2_debug_mem_slave.address
 			Nios2_debug_mem_slave_write                                    => mm_interconnect_0_nios2_debug_mem_slave_write,                              --                                                     .write
 			Nios2_debug_mem_slave_read                                     => mm_interconnect_0_nios2_debug_mem_slave_read,                               --                                                     .read
@@ -1853,6 +1918,7 @@ begin
 			receiver3_irq => irq_mapper_receiver3_irq,           -- receiver3.irq
 			receiver4_irq => irq_mapper_receiver4_irq,           -- receiver4.irq
 			receiver5_irq => irq_mapper_receiver5_irq,           -- receiver5.irq
+			receiver6_irq => irq_mapper_receiver6_irq,           -- receiver6.irq
 			sender_irq    => nios2_irq_irq                       --    sender.irq
 		);
 

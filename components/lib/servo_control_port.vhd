@@ -27,7 +27,7 @@ architecture arch of servo_control_port is
 
 		--Port registers
 		cportreg: entity work.port_reg generic map(n => 16)
-		port map(clk, rst, read, write, data, writedata, readdata, data);
+		port map(clk, rst, read, write, not address(0), byteenable, data, writedata, readdata, data);
 
 		--servo_control component
 		csrvctrl: entity work.servo_control port map(en, rst, clk, pos, control);
