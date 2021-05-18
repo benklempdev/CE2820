@@ -247,6 +247,8 @@ begin
 	
 	G_SENSOR_SDI <= i2c_0_sda;
 	G_SENSOR_SCLK <= i2c_0_scl;
+	G_SENSOR_SDO <= '0';
+	G_SENSOR_CS_N <= '1';
 	
 	ARDUINO_IO <= arduino_io_signal(15 downto 12) & blinky & servo_control_1 & servo_control_0 & arduino_io_signal(8 downto 0);
 	
