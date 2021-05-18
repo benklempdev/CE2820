@@ -85,6 +85,7 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 		slider_switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
 		servo_control_0_export	   : out   std_logic;
 		servo_control_1_export	   : out   std_logic;
+		
 		--Yay
 		video_lt24_controller_0_lcd_on : out   std_logic;
 		video_lt24_controller_0_reset_n : out   std_logic;
@@ -96,11 +97,13 @@ architecture STRUCTURAL of DE10_Lite_Computer is
 		video_pll_0_ref_clk_clk		: in    std_logic;
 		video_pll_0_ref_reset_reset: in    std_logic;
 		
+		i2c_0_serial_sda_in			: in    std_logic;
+		i2c_0_serial_scl_in			: in    std_logic;
+		i2c_0_serial_sda_oe			: out   std_logic;
+		i2c_0_serial_scl_oe			: out   std_logic;
+		
 		--Testing
 		blinky_export					: out   std_logic;
-		
---		iservo_input_0_export		: out   std_logic_vector(15 downto 0);
---		iservo_input_1_export		: out   std_logic_vector(15 downto 0);
 		
 		system_pll_ref_clk_clk     : in    std_logic                     := 'X';             -- clk
 		system_pll_ref_reset_reset : in    std_logic                     := 'X'              -- reset
@@ -126,6 +129,9 @@ architecture STRUCTURAL of DE10_Lite_Computer is
     signal lt24_data: std_logic_vector(15 downto 0);
 	 
 	 signal dout, busy, penirq_n: std_logic;
+	 
+	 signal i2c_0_sda_in, i2c_0_scl_in, i2c_0_sda_oe, i2c_0_scl_oe: std_logic;
+	 signal i2c_0_sda, i2c_0_scl: std_logic;
 
 
 begin 
@@ -177,10 +183,12 @@ begin
 				video_pll_0_ref_clk_clk		=> CLOCK_50,
 				video_pll_0_ref_reset_reset=> '0',
 				
-				blinky_export					=> blinky,
+				i2c_0_serial_sda_in			=> i2c_0_sda_in,
+				i2c_0_serial_scl_in			=> i2c_0_scl_in,
+				i2c_0_serial_sda_oe			=> i2c_0_sda_oe,
+				i2c_0_serial_scl_oe			=> i2c_0_scl_oe,
 				
---				iservo_input_0_export		=> iservo_input_0,
---				iservo_input_1_export		=> iservo_input_1,
+				blinky_export					=> blinky,
 
 
 				sdram_addr                 => DRAM_ADDR,                 --                sdram.addr
@@ -232,10 +240,15 @@ begin
 	GPIO(7) <= lt24_data(1);
 	GPIO(8) <= lt24_data(0);
 	
---	cservo0: entity work.servo_control port map(iservo_input_0(8), '0', clock_50, iservo_input_0(7 downto 0), iservo_control_0);
---	cservo1: entity work.servo_control port map(iservo_input_1(8), '0', clock_50, iservo_input_1(7 downto 0), iservo_control_1);
+	i2c_0_sda_in <= i2c_0_sda;
+	i2c_0_sda <= '0' when i2c_0_sda_oe = '1' else 'Z';
+	i2c_0_scl_in <= i2c_0_scl;
+	i2c_0_scl <= '0' when i2c_0_scl_oe = '1' else 'Z';
 	
-	ARDUINO_IO <= arduino_io_signal(15 downto 13) & '1' & blinky & servo_control_1 & servo_control_0 & arduino_io_signal(8 downto 0);
+	G_SENSOR_SDI <= i2c_0_sda;
+	G_SENSOR_SCLK <= i2c_0_scl;
+	
+	ARDUINO_IO <= arduino_io_signal(15 downto 12) & blinky & servo_control_1 & servo_control_0 & arduino_io_signal(8 downto 0);
 	
 	
 end architecture STRUCTURAL;

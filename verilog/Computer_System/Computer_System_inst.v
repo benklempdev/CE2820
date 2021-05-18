@@ -36,6 +36,10 @@
 		.video_lt24_controller_0_wrx     (<connected-to-video_lt24_controller_0_wrx>),     //                        .wrx
 		.video_lt24_controller_0_dcx     (<connected-to-video_lt24_controller_0_dcx>),     //                        .dcx
 		.video_pll_0_ref_clk_clk         (<connected-to-video_pll_0_ref_clk_clk>),         //     video_pll_0_ref_clk.clk
-		.video_pll_0_ref_reset_reset     (<connected-to-video_pll_0_ref_reset_reset>)      //   video_pll_0_ref_reset.reset
+		.video_pll_0_ref_reset_reset     (<connected-to-video_pll_0_ref_reset_reset>),     //   video_pll_0_ref_reset.reset
+		.i2c_0_serial_sda_in             (<connected-to-i2c_0_serial_sda_in>),             //            i2c_0_serial.sda_in
+		.i2c_0_serial_scl_in             (<connected-to-i2c_0_serial_scl_in>),             //                        .scl_in
+		.i2c_0_serial_sda_oe             (<connected-to-i2c_0_serial_sda_oe>),             //                        .sda_oe
+		.i2c_0_serial_scl_oe             (<connected-to-i2c_0_serial_scl_oe>)              //                        .scl_oe
 	);
 

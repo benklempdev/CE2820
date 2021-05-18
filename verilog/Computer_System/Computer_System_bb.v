@@ -37,7 +37,11 @@ module Computer_System (
 	video_lt24_controller_0_wrx,
 	video_lt24_controller_0_dcx,
 	video_pll_0_ref_clk_clk,
-	video_pll_0_ref_reset_reset);	
+	video_pll_0_ref_reset_reset,
+	i2c_0_serial_sda_in,
+	i2c_0_serial_scl_in,
+	i2c_0_serial_sda_oe,
+	i2c_0_serial_scl_oe);	
 
 	inout	[15:0]	arduino_gpio_export;
 	output		arduino_reset_n_export;
@@ -77,4 +81,8 @@ module Computer_System (
 	output		video_lt24_controller_0_dcx;
 	input		video_pll_0_ref_clk_clk;
 	input		video_pll_0_ref_reset_reset;
+	input		i2c_0_serial_sda_in;
+	input		i2c_0_serial_scl_in;
+	output		i2c_0_serial_sda_oe;
+	output		i2c_0_serial_scl_oe;
 endmodule

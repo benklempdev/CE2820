@@ -37,7 +37,11 @@
 			video_lt24_controller_0_wrx     : out   std_logic;                                        -- wrx
 			video_lt24_controller_0_dcx     : out   std_logic;                                        -- dcx
 			video_pll_0_ref_clk_clk         : in    std_logic                     := 'X';             -- clk
-			video_pll_0_ref_reset_reset     : in    std_logic                     := 'X'              -- reset
+			video_pll_0_ref_reset_reset     : in    std_logic                     := 'X';             -- reset
+			i2c_0_serial_sda_in             : in    std_logic                     := 'X';             -- sda_in
+			i2c_0_serial_scl_in             : in    std_logic                     := 'X';             -- scl_in
+			i2c_0_serial_sda_oe             : out   std_logic;                                        -- sda_oe
+			i2c_0_serial_scl_oe             : out   std_logic                                         -- scl_oe
 		);
 	end component Computer_System;
 
@@ -80,6 +84,10 @@
 			video_lt24_controller_0_wrx     => CONNECTED_TO_video_lt24_controller_0_wrx,     --                        .wrx
 			video_lt24_controller_0_dcx     => CONNECTED_TO_video_lt24_controller_0_dcx,     --                        .dcx
 			video_pll_0_ref_clk_clk         => CONNECTED_TO_video_pll_0_ref_clk_clk,         --     video_pll_0_ref_clk.clk
-			video_pll_0_ref_reset_reset     => CONNECTED_TO_video_pll_0_ref_reset_reset      --   video_pll_0_ref_reset.reset
+			video_pll_0_ref_reset_reset     => CONNECTED_TO_video_pll_0_ref_reset_reset,     --   video_pll_0_ref_reset.reset
+			i2c_0_serial_sda_in             => CONNECTED_TO_i2c_0_serial_sda_in,             --            i2c_0_serial.sda_in
+			i2c_0_serial_scl_in             => CONNECTED_TO_i2c_0_serial_scl_in,             --                        .scl_in
+			i2c_0_serial_sda_oe             => CONNECTED_TO_i2c_0_serial_sda_oe,             --                        .sda_oe
+			i2c_0_serial_scl_oe             => CONNECTED_TO_i2c_0_serial_scl_oe              --                        .scl_oe
 		);
 

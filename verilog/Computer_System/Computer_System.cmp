@@ -6,6 +6,10 @@
 			expansion_jp1_export            : inout std_logic_vector(31 downto 0) := (others => 'X'); -- export
 			hex3_hex0_export                : out   std_logic_vector(31 downto 0);                    -- export
 			hex5_hex4_export                : out   std_logic_vector(31 downto 0);                    -- export
+			i2c_0_serial_sda_in             : in    std_logic                     := 'X';             -- sda_in
+			i2c_0_serial_scl_in             : in    std_logic                     := 'X';             -- scl_in
+			i2c_0_serial_sda_oe             : out   std_logic;                                        -- sda_oe
+			i2c_0_serial_scl_oe             : out   std_logic;                                        -- scl_oe
 			leds_export                     : out   std_logic_vector(9 downto 0);                     -- export
 			lt24_touch_dout                 : in    std_logic                     := 'X';             -- dout
 			lt24_touch_penirq_n             : in    std_logic                     := 'X';             -- penirq_n

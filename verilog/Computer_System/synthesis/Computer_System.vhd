@@ -14,6 +14,10 @@ entity Computer_System is
 		expansion_jp1_export            : inout std_logic_vector(31 downto 0) := (others => '0'); --           expansion_jp1.export
 		hex3_hex0_export                : out   std_logic_vector(31 downto 0);                    --               hex3_hex0.export
 		hex5_hex4_export                : out   std_logic_vector(31 downto 0);                    --               hex5_hex4.export
+		i2c_0_serial_sda_in             : in    std_logic                     := '0';             --            i2c_0_serial.sda_in
+		i2c_0_serial_scl_in             : in    std_logic                     := '0';             --                        .scl_in
+		i2c_0_serial_sda_oe             : out   std_logic;                                        --                        .sda_oe
+		i2c_0_serial_scl_oe             : out   std_logic;                                        --                        .scl_oe
 		leds_export                     : out   std_logic_vector(9 downto 0);                     --                    leds.export
 		lt24_touch_dout                 : in    std_logic                     := '0';             --              lt24_touch.dout
 		lt24_touch_penirq_n             : in    std_logic                     := '0';             --                        .penirq_n
@@ -368,6 +372,34 @@ architecture rtl of Computer_System is
 		);
 	end component blinky_test_port;
 
+	component altera_avalon_i2c is
+		generic (
+			USE_AV_ST       : integer := 0;
+			FIFO_DEPTH      : integer := 4;
+			FIFO_DEPTH_LOG2 : integer := 2
+		);
+		port (
+			clk       : in  std_logic                     := 'X';             -- clk
+			rst_n     : in  std_logic                     := 'X';             -- reset_n
+			intr      : out std_logic;                                        -- irq
+			addr      : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- address
+			read      : in  std_logic                     := 'X';             -- read
+			write     : in  std_logic                     := 'X';             -- write
+			writedata : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			readdata  : out std_logic_vector(31 downto 0);                    -- readdata
+			sda_in    : in  std_logic                     := 'X';             -- sda_in
+			scl_in    : in  std_logic                     := 'X';             -- scl_in
+			sda_oe    : out std_logic;                                        -- sda_oe
+			scl_oe    : out std_logic;                                        -- scl_oe
+			src_data  : out std_logic_vector(7 downto 0);                     -- data
+			src_valid : out std_logic;                                        -- valid
+			src_ready : in  std_logic                     := 'X';             -- ready
+			snk_data  : in  std_logic_vector(15 downto 0) := (others => 'X'); -- data
+			snk_valid : in  std_logic                     := 'X';             -- valid
+			snk_ready : out std_logic                                         -- ready
+		);
+	end component altera_avalon_i2c;
+
 	component lt24_touch_port is
 		port (
 			clk          : in  std_logic                     := 'X';             -- clk
@@ -656,6 +688,11 @@ architecture rtl of Computer_System is
 			HEX5_HEX4_s1_readdata                                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			HEX5_HEX4_s1_writedata                                         : out std_logic_vector(31 downto 0);                    -- writedata
 			HEX5_HEX4_s1_chipselect                                        : out std_logic;                                        -- chipselect
+			i2c_0_csr_address                                              : out std_logic_vector(3 downto 0);                     -- address
+			i2c_0_csr_write                                                : out std_logic;                                        -- write
+			i2c_0_csr_read                                                 : out std_logic;                                        -- read
+			i2c_0_csr_readdata                                             : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			i2c_0_csr_writedata                                            : out std_logic_vector(31 downto 0);                    -- writedata
 			Interval_Timer_s1_address                                      : out std_logic_vector(2 downto 0);                     -- address
 			Interval_Timer_s1_write                                        : out std_logic;                                        -- write
 			Interval_Timer_s1_readdata                                     : in  std_logic_vector(15 downto 0) := (others => 'X'); -- readdata
@@ -756,6 +793,7 @@ architecture rtl of Computer_System is
 			receiver4_irq : in  std_logic                     := 'X'; -- irq
 			receiver5_irq : in  std_logic                     := 'X'; -- irq
 			receiver6_irq : in  std_logic                     := 'X'; -- irq
+			receiver7_irq : in  std_logic                     := 'X'; -- irq
 			sender_irq    : out std_logic_vector(31 downto 0)         -- irq
 		);
 	end component Computer_System_irq_mapper;
@@ -964,7 +1002,7 @@ architecture rtl of Computer_System is
 	signal video_pixel_buffer_dma_0_avalon_pixel_source_startofpacket                 : std_logic;                     -- video_pixel_buffer_dma_0:stream_startofpacket -> video_lt24_controller_0:startofpacket
 	signal video_pixel_buffer_dma_0_avalon_pixel_source_endofpacket                   : std_logic;                     -- video_pixel_buffer_dma_0:stream_endofpacket -> video_lt24_controller_0:endofpacket
 	signal video_pll_0_lcd_clk_clk                                                    : std_logic;                     -- video_pll_0:lcd_clk_clk -> [mm_interconnect_0:video_pll_0_lcd_clk_clk, rst_controller_002:clk, video_lt24_controller_0:clk, video_pixel_buffer_dma_0:clk]
-	signal system_pll_sys_clk_clk                                                     : std_logic;                     -- System_PLL:sys_clk_clk -> [ADC:clock, Arduino_GPIO:clk, Arduino_Reset_N:clk, Expansion_JP1:clk, HEX3_HEX0:clk, HEX5_HEX4:clk, Interval_Timer:clk, Interval_Timer_2:clk, JTAG_UART:clk, JTAG_to_FPGA_Bridge:clk_clk, LEDs:clk, Nios2:clk, Onchip_SRAM:clk, Pushbuttons:clk, SDRAM:clk, Servo0:clk, Servo1:clk, Slider_Switches:clk, SysID:clock, blinky_test_0:clk, irq_mapper:clk, lt24_touch_0:clk, mm_interconnect_0:System_PLL_sys_clk_clk, rst_controller:clk, rst_controller_001:clk]
+	signal system_pll_sys_clk_clk                                                     : std_logic;                     -- System_PLL:sys_clk_clk -> [ADC:clock, Arduino_GPIO:clk, Arduino_Reset_N:clk, Expansion_JP1:clk, HEX3_HEX0:clk, HEX5_HEX4:clk, Interval_Timer:clk, Interval_Timer_2:clk, JTAG_UART:clk, JTAG_to_FPGA_Bridge:clk_clk, LEDs:clk, Nios2:clk, Onchip_SRAM:clk, Pushbuttons:clk, SDRAM:clk, Servo0:clk, Servo1:clk, Slider_Switches:clk, SysID:clock, blinky_test_0:clk, i2c_0:clk, irq_mapper:clk, lt24_touch_0:clk, mm_interconnect_0:System_PLL_sys_clk_clk, rst_controller:clk, rst_controller_001:clk]
 	signal system_pll_reset_source_reset                                              : std_logic;                     -- System_PLL:reset_source_reset -> [JTAG_to_FPGA_Bridge:clk_reset_reset, rst_controller:reset_in0, rst_controller_001:reset_in1]
 	signal nios2_custom_instruction_master_readra                                     : std_logic;                     -- Nios2:D_ci_readra -> Nios2_custom_instruction_master_translator:ci_slave_readra
 	signal nios2_custom_instruction_master_a                                          : std_logic_vector(4 downto 0);  -- Nios2:D_ci_a -> Nios2_custom_instruction_master_translator:ci_slave_a
@@ -1089,6 +1127,11 @@ architecture rtl of Computer_System is
 	signal mm_interconnect_0_lt24_touch_0_avalon_slave_0_writedata                    : std_logic_vector(31 downto 0); -- mm_interconnect_0:lt24_touch_0_avalon_slave_0_writedata -> lt24_touch_0:writedata
 	signal mm_interconnect_0_sysid_control_slave_readdata                             : std_logic_vector(31 downto 0); -- SysID:readdata -> mm_interconnect_0:SysID_control_slave_readdata
 	signal mm_interconnect_0_sysid_control_slave_address                              : std_logic_vector(0 downto 0);  -- mm_interconnect_0:SysID_control_slave_address -> SysID:address
+	signal mm_interconnect_0_i2c_0_csr_readdata                                       : std_logic_vector(31 downto 0); -- i2c_0:readdata -> mm_interconnect_0:i2c_0_csr_readdata
+	signal mm_interconnect_0_i2c_0_csr_address                                        : std_logic_vector(3 downto 0);  -- mm_interconnect_0:i2c_0_csr_address -> i2c_0:addr
+	signal mm_interconnect_0_i2c_0_csr_read                                           : std_logic;                     -- mm_interconnect_0:i2c_0_csr_read -> i2c_0:read
+	signal mm_interconnect_0_i2c_0_csr_write                                          : std_logic;                     -- mm_interconnect_0:i2c_0_csr_write -> i2c_0:write
+	signal mm_interconnect_0_i2c_0_csr_writedata                                      : std_logic_vector(31 downto 0); -- mm_interconnect_0:i2c_0_csr_writedata -> i2c_0:writedata
 	signal mm_interconnect_0_onchip_sram_s1_chipselect                                : std_logic;                     -- mm_interconnect_0:Onchip_SRAM_s1_chipselect -> Onchip_SRAM:chipselect
 	signal mm_interconnect_0_onchip_sram_s1_readdata                                  : std_logic_vector(31 downto 0); -- Onchip_SRAM:readdata -> mm_interconnect_0:Onchip_SRAM_s1_readdata
 	signal mm_interconnect_0_onchip_sram_s1_address                                   : std_logic_vector(13 downto 0); -- mm_interconnect_0:Onchip_SRAM_s1_address -> Onchip_SRAM:address
@@ -1171,12 +1214,13 @@ architecture rtl of Computer_System is
 	signal mm_interconnect_0_onchip_sram_s2_writedata                                 : std_logic_vector(31 downto 0); -- mm_interconnect_0:Onchip_SRAM_s2_writedata -> Onchip_SRAM:writedata2
 	signal mm_interconnect_0_onchip_sram_s2_clken                                     : std_logic;                     -- mm_interconnect_0:Onchip_SRAM_s2_clken -> Onchip_SRAM:clken2
 	signal irq_mapper_receiver0_irq                                                   : std_logic;                     -- lt24_touch_0:irq -> irq_mapper:receiver0_irq
-	signal irq_mapper_receiver1_irq                                                   : std_logic;                     -- Pushbuttons:irq -> irq_mapper:receiver1_irq
-	signal irq_mapper_receiver2_irq                                                   : std_logic;                     -- Expansion_JP1:irq -> irq_mapper:receiver2_irq
-	signal irq_mapper_receiver3_irq                                                   : std_logic;                     -- Arduino_GPIO:irq -> irq_mapper:receiver3_irq
-	signal irq_mapper_receiver4_irq                                                   : std_logic;                     -- JTAG_UART:av_irq -> irq_mapper:receiver4_irq
-	signal irq_mapper_receiver5_irq                                                   : std_logic;                     -- Interval_Timer:irq -> irq_mapper:receiver5_irq
-	signal irq_mapper_receiver6_irq                                                   : std_logic;                     -- Interval_Timer_2:irq -> irq_mapper:receiver6_irq
+	signal irq_mapper_receiver1_irq                                                   : std_logic;                     -- i2c_0:intr -> irq_mapper:receiver1_irq
+	signal irq_mapper_receiver2_irq                                                   : std_logic;                     -- Pushbuttons:irq -> irq_mapper:receiver2_irq
+	signal irq_mapper_receiver3_irq                                                   : std_logic;                     -- Expansion_JP1:irq -> irq_mapper:receiver3_irq
+	signal irq_mapper_receiver4_irq                                                   : std_logic;                     -- Arduino_GPIO:irq -> irq_mapper:receiver4_irq
+	signal irq_mapper_receiver5_irq                                                   : std_logic;                     -- JTAG_UART:av_irq -> irq_mapper:receiver5_irq
+	signal irq_mapper_receiver6_irq                                                   : std_logic;                     -- Interval_Timer:irq -> irq_mapper:receiver6_irq
+	signal irq_mapper_receiver7_irq                                                   : std_logic;                     -- Interval_Timer_2:irq -> irq_mapper:receiver7_irq
 	signal nios2_irq_irq                                                              : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> Nios2:irq
 	signal rst_controller_reset_out_reset                                             : std_logic;                     -- rst_controller:reset_out -> [ADC:reset, Onchip_SRAM:reset, Servo0:rst, Servo1:rst, blinky_test_0:reset, lt24_touch_0:rst, mm_interconnect_0:JTAG_to_FPGA_Bridge_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_0:SDRAM_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                                         : std_logic;                     -- rst_controller:reset_req -> [Onchip_SRAM:reset_req, rst_translator:reset_req_in]
@@ -1198,7 +1242,7 @@ architecture rtl of Computer_System is
 	signal mm_interconnect_0_arduino_reset_n_s1_write_ports_inv                       : std_logic;                     -- mm_interconnect_0_arduino_reset_n_s1_write:inv -> Arduino_Reset_N:write_n
 	signal mm_interconnect_0_interval_timer_s1_write_ports_inv                        : std_logic;                     -- mm_interconnect_0_interval_timer_s1_write:inv -> Interval_Timer:write_n
 	signal mm_interconnect_0_interval_timer_2_s1_write_ports_inv                      : std_logic;                     -- mm_interconnect_0_interval_timer_2_s1_write:inv -> Interval_Timer_2:write_n
-	signal rst_controller_reset_out_reset_ports_inv                                   : std_logic;                     -- rst_controller_reset_out_reset:inv -> [Arduino_GPIO:reset_n, Arduino_Reset_N:reset_n, Expansion_JP1:reset_n, HEX3_HEX0:reset_n, HEX5_HEX4:reset_n, Interval_Timer:reset_n, Interval_Timer_2:reset_n, JTAG_UART:rst_n, LEDs:reset_n, Pushbuttons:reset_n, SDRAM:reset_n, Slider_Switches:reset_n, SysID:reset_n]
+	signal rst_controller_reset_out_reset_ports_inv                                   : std_logic;                     -- rst_controller_reset_out_reset:inv -> [Arduino_GPIO:reset_n, Arduino_Reset_N:reset_n, Expansion_JP1:reset_n, HEX3_HEX0:reset_n, HEX5_HEX4:reset_n, Interval_Timer:reset_n, Interval_Timer_2:reset_n, JTAG_UART:rst_n, LEDs:reset_n, Pushbuttons:reset_n, SDRAM:reset_n, Slider_Switches:reset_n, SysID:reset_n, i2c_0:rst_n]
 	signal rst_controller_001_reset_out_reset_ports_inv                               : std_logic;                     -- rst_controller_001_reset_out_reset:inv -> Nios2:reset_n
 
 begin
@@ -1237,7 +1281,7 @@ begin
 			chipselect => mm_interconnect_0_arduino_gpio_s1_chipselect,      --                    .chipselect
 			readdata   => mm_interconnect_0_arduino_gpio_s1_readdata,        --                    .readdata
 			bidir_port => arduino_gpio_export,                               -- external_connection.export
-			irq        => irq_mapper_receiver3_irq                           --                 irq.irq
+			irq        => irq_mapper_receiver4_irq                           --                 irq.irq
 		);
 
 	arduino_reset_n : component Computer_System_Arduino_Reset_N
@@ -1262,7 +1306,7 @@ begin
 			chipselect => mm_interconnect_0_expansion_jp1_s1_chipselect,      --                    .chipselect
 			readdata   => mm_interconnect_0_expansion_jp1_s1_readdata,        --                    .readdata
 			bidir_port => expansion_jp1_export,                               -- external_connection.export
-			irq        => irq_mapper_receiver2_irq                            --                 irq.irq
+			irq        => irq_mapper_receiver3_irq                            --                 irq.irq
 		);
 
 	hex3_hex0 : component Computer_System_HEX3_HEX0
@@ -1298,7 +1342,7 @@ begin
 			readdata   => mm_interconnect_0_interval_timer_s1_readdata,        --      .readdata
 			chipselect => mm_interconnect_0_interval_timer_s1_chipselect,      --      .chipselect
 			write_n    => mm_interconnect_0_interval_timer_s1_write_ports_inv, --      .write_n
-			irq        => irq_mapper_receiver5_irq                             --   irq.irq
+			irq        => irq_mapper_receiver6_irq                             --   irq.irq
 		);
 
 	interval_timer_2 : component Computer_System_Interval_Timer
@@ -1310,7 +1354,7 @@ begin
 			readdata   => mm_interconnect_0_interval_timer_2_s1_readdata,        --      .readdata
 			chipselect => mm_interconnect_0_interval_timer_2_s1_chipselect,      --      .chipselect
 			write_n    => mm_interconnect_0_interval_timer_2_s1_write_ports_inv, --      .write_n
-			irq        => irq_mapper_receiver6_irq                               --   irq.irq
+			irq        => irq_mapper_receiver7_irq                               --   irq.irq
 		);
 
 	jtag_uart : component Computer_System_JTAG_UART
@@ -1324,7 +1368,7 @@ begin
 			av_write_n     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv, --                  .write_n
 			av_writedata   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,       --                  .writedata
 			av_waitrequest => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest,     --                  .waitrequest
-			av_irq         => irq_mapper_receiver4_irq                                       --               irq.irq
+			av_irq         => irq_mapper_receiver5_irq                                       --               irq.irq
 		);
 
 	jtag_to_fpga_bridge : component Computer_System_JTAG_to_FPGA_Bridge
@@ -1453,7 +1497,7 @@ begin
 			chipselect => mm_interconnect_0_pushbuttons_s1_chipselect,      --                    .chipselect
 			readdata   => mm_interconnect_0_pushbuttons_s1_readdata,        --                    .readdata
 			in_port    => pushbuttons_export,                               -- external_connection.export
-			irq        => irq_mapper_receiver1_irq                          --                 irq.irq
+			irq        => irq_mapper_receiver2_irq                          --                 irq.irq
 		);
 
 	sdram : component Computer_System_SDRAM
@@ -1537,6 +1581,33 @@ begin
 			clk     => system_pll_sys_clk_clk,         --       clock.clk
 			reset   => rst_controller_reset_out_reset, --       reset.reset
 			oblinky => blinky_export                   -- conduit_end.export
+		);
+
+	i2c_0 : component altera_avalon_i2c
+		generic map (
+			USE_AV_ST       => 0,
+			FIFO_DEPTH      => 4,
+			FIFO_DEPTH_LOG2 => 2
+		)
+		port map (
+			clk       => system_pll_sys_clk_clk,                   --            clock.clk
+			rst_n     => rst_controller_reset_out_reset_ports_inv, --       reset_sink.reset_n
+			intr      => irq_mapper_receiver1_irq,                 -- interrupt_sender.irq
+			addr      => mm_interconnect_0_i2c_0_csr_address,      --              csr.address
+			read      => mm_interconnect_0_i2c_0_csr_read,         --                 .read
+			write     => mm_interconnect_0_i2c_0_csr_write,        --                 .write
+			writedata => mm_interconnect_0_i2c_0_csr_writedata,    --                 .writedata
+			readdata  => mm_interconnect_0_i2c_0_csr_readdata,     --                 .readdata
+			sda_in    => i2c_0_serial_sda_in,                      --       i2c_serial.sda_in
+			scl_in    => i2c_0_serial_scl_in,                      --                 .scl_in
+			sda_oe    => i2c_0_serial_sda_oe,                      --                 .sda_oe
+			scl_oe    => i2c_0_serial_scl_oe,                      --                 .scl_oe
+			src_data  => open,                                     --      (terminated)
+			src_valid => open,                                     --      (terminated)
+			src_ready => '0',                                      --      (terminated)
+			snk_data  => "0000000000000000",                       --      (terminated)
+			snk_valid => '0',                                      --      (terminated)
+			snk_ready => open                                      --      (terminated)
 		);
 
 	lt24_touch_0 : component lt24_touch_port
@@ -1820,6 +1891,11 @@ begin
 			HEX5_HEX4_s1_readdata                                          => mm_interconnect_0_hex5_hex4_s1_readdata,                                    --                                                     .readdata
 			HEX5_HEX4_s1_writedata                                         => mm_interconnect_0_hex5_hex4_s1_writedata,                                   --                                                     .writedata
 			HEX5_HEX4_s1_chipselect                                        => mm_interconnect_0_hex5_hex4_s1_chipselect,                                  --                                                     .chipselect
+			i2c_0_csr_address                                              => mm_interconnect_0_i2c_0_csr_address,                                        --                                            i2c_0_csr.address
+			i2c_0_csr_write                                                => mm_interconnect_0_i2c_0_csr_write,                                          --                                                     .write
+			i2c_0_csr_read                                                 => mm_interconnect_0_i2c_0_csr_read,                                           --                                                     .read
+			i2c_0_csr_readdata                                             => mm_interconnect_0_i2c_0_csr_readdata,                                       --                                                     .readdata
+			i2c_0_csr_writedata                                            => mm_interconnect_0_i2c_0_csr_writedata,                                      --                                                     .writedata
 			Interval_Timer_s1_address                                      => mm_interconnect_0_interval_timer_s1_address,                                --                                    Interval_Timer_s1.address
 			Interval_Timer_s1_write                                        => mm_interconnect_0_interval_timer_s1_write,                                  --                                                     .write
 			Interval_Timer_s1_readdata                                     => mm_interconnect_0_interval_timer_s1_readdata,                               --                                                     .readdata
@@ -1919,6 +1995,7 @@ begin
 			receiver4_irq => irq_mapper_receiver4_irq,           -- receiver4.irq
 			receiver5_irq => irq_mapper_receiver5_irq,           -- receiver5.irq
 			receiver6_irq => irq_mapper_receiver6_irq,           -- receiver6.irq
+			receiver7_irq => irq_mapper_receiver7_irq,           -- receiver7.irq
 			sender_irq    => nios2_irq_irq                       --    sender.irq
 		);
 
